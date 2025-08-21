@@ -1,11 +1,17 @@
 /* Paleta de Cores */
 :root {
-    --primary-color: #200D00; /* Azul Elétrico Profundo - Cor do logótipo */
-    --secondary-color: #E5E8FF; /* Azul Claro Suave - Fundos, destaque */
-    --text-color: #2A2A2A; /* Cinza Antracito - Texto principal */
-    --background-color: #F8F6F6; /* Cinza Neve - Fundo geral da página */
-    --error-color: #FF5A5F; /* Vermelho Coral - Erro */
-    --success-color: #00C48C; /* Verde Suave - Sucesso */
+    --primary-color: #200D00;
+    /* Azul Elétrico Profundo - Cor do logótipo */
+    --secondary-color: #E5E8FF;
+    /* Azul Claro Suave - Fundos, destaque */
+    --text-color: #2A2A2A;
+    /* Cinza Antracito - Texto principal */
+    --background-color: #F8F6F6;
+    /* Cinza Neve - Fundo geral da página */
+    --error-color: #FF5A5F;
+    /* Vermelho Coral - Erro */
+    --success-color: #00C48C;
+    /* Verde Suave - Sucesso */
 }
 
 /* Base */
@@ -44,8 +50,9 @@ header {
     padding: 0 20px;
 }
 
+
 .logo img {
-    height: 40px;
+    height: 70px;
     /* Ajustado para uma altura mais adequada */
 }
 
@@ -78,6 +85,29 @@ nav a:hover {
 .btn-login:hover {
     background-color: var(--primary-color);
     color: #fff;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--primary-color);
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 1100;
+    }
+
+    nav ul {
+        display: none !important;
+    }
 }
 
 /* Main Content */
@@ -367,39 +397,47 @@ main {
     background: #fff;
     padding: 32px 24px;
     border-radius: 8px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
     text-align: center;
 }
+
 .login-container h2 {
     margin-bottom: 24px;
 }
+
 .login-container .input-group {
     margin-bottom: 18px;
     text-align: left;
 }
+
 .login-container label {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
 }
+
 .login-container input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
 .login-container .btn-donate {
     width: 100%;
     margin-top: 18px;
 }
+
 .login-register {
     margin-top: 18px;
     font-size: 0.95rem;
 }
+
 .login-register a {
     color: var(--primary-color);
     text-decoration: underline;
 }
+
 .login-logo img {
     display: block;
     margin: 0 auto 18px auto;
@@ -412,31 +450,37 @@ main {
     background: #fff;
     padding: 32px 24px;
     border-radius: 8px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
     text-align: center;
 }
+
 .register-container h2 {
     margin-bottom: 24px;
 }
+
 .register-container .input-group {
     margin-bottom: 18px;
     text-align: left;
 }
+
 .register-container label {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
 }
+
 .register-container input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
 .register-container .btn-donate {
     width: 100%;
     margin-top: 18px;
 }
+
 .register-logo img {
     display: block;
     margin: 0 auto 18px auto;
@@ -508,7 +552,8 @@ footer {
         flex-direction: column;
     }
 
-    .campaign-image, .campaign-info {
+    .campaign-image,
+    .campaign-info {
         width: 100%;
     }
 
@@ -531,4 +576,162 @@ footer {
         flex-direction: column;
         gap: 0.5rem;
     }
+}
+
+/* Melhorando responsividade das campanhas sugeridas */
+@media (max-width: 1024px) {
+    .campaign-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .campaign-card {
+        width: 90%;
+        min-width: 220px;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Ajustando containers de login e cadastro */
+@media (max-width: 600px) {
+    .logo {
+        margin-right: 320px;
+    }
+
+    .login-container,
+    .register-container {
+        max-width: 98vw;
+        padding: 18px 8px;
+        margin: 30px auto;
+    }
+
+    .login-logo img,
+    .register-logo img {
+        width: 60px;
+    }
+}
+
+/* Ajustando seção de transparência e como doar */
+@media (max-width: 600px) {
+
+    .how-to-donate-container,
+    .transparencia-container {
+        max-width: 98vw;
+        padding: 0 8px;
+    }
+
+    .how-to-donate ol,
+    .transparencia-list {
+        max-width: 98vw;
+        padding: 0 8px;
+    }
+}
+
+/* Ajustando header e navegação */
+@media (max-width: 500px) {
+    .header-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0 8px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+}
+
+/* Ajustando botões */
+@media (max-width: 500px) {
+
+    .btn-donate,
+    .btn-login {
+        padding: 10px 8px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Ajustando footer */
+@media (max-width: 500px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0 8px;
+    }
+
+    .footer-logo img {
+        height: 24px;
+    }
+}
+
+/* Ajustando imagens das campanhas */
+@media (max-width: 600px) {
+    .campaign-card img {
+        height: 120px;
+    }
+
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        /* Escondido por padrão */
+        width: 220px;
+        height: 100%;
+        background: #fff;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+        transition: left 0.3s;
+        z-index: 1200;
+        padding-top: 60px;
+        overflow-y: auto;
+    }
+
+    .side-menu.open {
+        left: 0;
+        /* Exibe o menu */
+    }
+
+    .side-menu ul {
+        list-style: none;
+        padding: 0 24px;
+        margin: 0;
+        text-align: left;
+    }
+
+    .side-menu li {
+        margin-bottom: 2rem;
+    }
+
+    .side-menu a {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul:not(.side-menu ul) {
+        display: none !important;
+    }
+}
+
+/* Side Menu */
+
+.side-menu.open {
+    left: 0;
+    /* Exibe o menu */
 }
