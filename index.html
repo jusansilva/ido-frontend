@@ -5,358 +5,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iDoe - Ajude uma Causa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src="logo.jpeg" alt="Logo iDoe">
+<body class="bg-[var(--background-color)] #2A2A2A] font-['Roboto',sans-serif]">
+    <!-- Header fixo -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-2">
+                <img src="logo.jpeg" alt="Logo iDoe" class="h-20 md:h-20">
             </div>
-            <button id="menu-toggle" class="menu-toggle">&#9776;</button>
-            <nav id="side-menu" class="side-menu">
-                <ul>
-                    <li><a href="#" id="btn-home">Início</a></li>
-                    <li><a href="#" id="btn-campanha">Campanhas</a></li>
-                    <li><a href="#" id="btn-how-to-donate">Como Doar</a></li>
-                    <li><a href="#" id="btn-transparencia">Transparência</a></li>
-                    <li><a href="#" id="btn-login" class="btn-login">Login</a></li>
-                </ul>
+            <nav class="hidden md:flex gap-8">
+                <a href="#" class="font-medium hover:text-[#200D00]">Início</a>
+                <a href="#" class="font-medium hover:text-[#200D00]">Campanhas</a>
+                <a href="#" class="font-medium hover:text-[#200D00]">Como Doar</a>
+                <a href="#" class="font-medium hover:text-[#200D00]">Transparência</a>
+                <a href="#" class="btn-login">Login</a>
             </nav>
+            <button id="menu-toggle" class="block md:hidden text-3xl text-[#200D00]">
+                &#9776;
+            </button>
         </div>
+        <!-- Side menu mobile -->
+        <nav id="side-menu" class="fixed top-0 right-[-250px] w-[220px] h-full bg-white shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col">
+            <div class="flex flex-col items-center px-6 mb-8">
+                <button id="close-menu" class="text-2xl text-[var(--primary-color)] self-end" aria-label="Fechar menu">&times;</button>
+                <img src="logo.jpeg" alt="Logo iDoe" class="h-20 mb-4">
+            </div>
+            <ul class="flex flex-col gap-6 px-6">
+                <li><a href="#" class="font-medium text-[var(--primary-color)]">Início</a></li>
+                <li><a href="#" class="font-medium text-[var(--primary-color)]">Campanhas</a></li>
+                <li><a href="#" class="font-medium text-[var(--primary-color)]">Como Doar</a></li>
+                <li><a href="#" class="font-medium text-[var(--primary-color)]">Transparência</a></li>
+                <li><a href="#" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <section id="home-section">
-            <section id="campaign-detail" class="campaign-detail">
-                <div class="campaign-header">
-                    <img src="logo.jpeg" alt="Capa da Campanha" class="campaign-image">
-                    <div class="campaign-info">
-                        <h1>Um Lar para Crianças em Situação de Risco</h1>
-                        <p class="campaign-description">
-                            Nosso objetivo é arrecadar fundos para a construção de um lar que oferecerá abrigo,
-                            alimentação,
-                            educação e carinho para crianças desamparadas. Juntos, podemos construir um futuro mais
-                            seguro e digno para elas.
-                        </p>
-                        <div class="campaign-progress">
-                            <div class="progress-bar-container">
-                                <div class="progress-bar" style="width: 30%;"></div>
-                            </div>
-                            <p class="progress-text"><strong>R$ 3.000</strong> de R$ 10.000 arrecadados</p>
-                        </div>
-                        <div class="campaign-metrics">
-                            <span><strong>300</strong> Doadores</span>
-                            <span><strong>20</strong> Dias Restantes</span>
-                        </div>
-                    </div>
+    <!-- Espaço para header fixo -->
+    <div class="h-20 md:h-24"></div>
+
+    <!-- Conteúdo principal -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Hero Section Inspirado no Vakinha -->
+        <section class="bg-white rounded-xl shadow-lg max-w-5xl mx-auto mt-12 mb-12 p-8 flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-1">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#200D00] mb-4 leading-tight">
+                    Transforme vidas com sua doação!
+                </h1>
+                <p class="text-lg #2A2A2A] mb-6">
+                    Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 mb-4">
+                    <button class="bg-[#00C48C] text-white font-bold px-6 py-3 rounded-lg shadow transition hover:bg-green-700">
+                        Criar campanha
+                    </button>
+                    <button class="border-2 border-[#200D00] text-[#200D00] font-bold px-6 py-3 rounded-lg bg-white hover:bg-[var(--secondary-color)] transition">
+                        Quero doar
+                    </button>
                 </div>
-
-                <div id="donation-form-container" class="donation-form-container">
-                    <h2>Faça sua doação</h2>
-                    <p>Sua ajuda é fundamental para que essa campanha se torne realidade. Escolha a melhor forma de
-                        doação para você.</p>
-                    <form id="donationForm">
-                        <div class="input-group">
-                            <label for="donationAmount">Valor da Doação (R$)</label>
-                            <input type="number" id="donationAmount" name="donationAmount" placeholder="Ex: 50.00"
-                                min="1" required>
-                        </div>
-
-                        <div class="payment-options">
-                            <h3>Método de Pagamento</h3>
-                            <div class="payment-option">
-                                <input type="radio" id="pix" name="paymentMethod" value="pix" checked>
-                                <label for="pix">PIX</label>
-                            </div>
-                            <div class="payment-option">
-                                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard">
-                                <label for="creditCard">Cartão de Crédito</label>
-                            </div>
-                            <div class="payment-option">
-                                <input type="radio" id="boleto" name="paymentMethod" value="boleto">
-                                <label for="boleto">Boleto</label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-donate">Doar Agora</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Section: Como Doar -->
-            <section id="how-to-donate" class="how-to-donate">
-                <div class="how-to-donate-container">
-                    <h2>Como Doar</h2>
-                    <p>Veja como é fácil ajudar uma causa:</p>
-                    <ol>
-                        <li>
-                            <strong>Escolha uma campanha:</strong>
-                            Navegue pelas campanhas e selecione aquela que deseja apoiar.
-                        </li>
-                        <li>
-                            <strong>Defina o valor:</strong>
-                            Informe o valor que deseja doar.
-                        </li>
-                        <li>
-                            <strong>Selecione o método de pagamento:</strong>
-                            Escolha entre PIX, cartão de crédito ou boleto.
-                        </li>
-                        <li>
-                            <strong>Finalize sua doação:</strong>
-                            Complete o processo e receba a confirmação por e-mail.
-                        </li>
-                    </ol>
-                    <a href="#donationForm" class="btn-donate">Quero Doar Agora</a>
-                </div>
-            </section>
-
-            <section id="suggested-campaigns" class="suggested-campaigns">
-                <h2>Outras Campanhas que Você Pode Gostar</h2>
-                <div class="campaign-list">
-                    <div class="campaign-card">
-                        <img src="logo.jpeg" alt="Campanha 1">
-                        <h3>Água potável para o sertão</h3>
-                        <p>Levar filtros de água para famílias em comunidades rurais do Nordeste do Brasil.</p>
-                        <div class="progress-bar-container small">
-                            <div class="progress-bar" style="width: 75%;"></div>
-                        </div>
-                        <a href="#" class="btn-donate small">Doar</a>
-                    </div>
-                    <div class="campaign-card">
-                        <img src="logo.jpeg" alt="Campanha 2">
-                        <h3>Alimentando o Futuro</h3>
-                        <p>Distribuição de cestas básicas para famílias carentes em áreas urbanas.</p>
-                        <div class="progress-bar-container small">
-                            <div class="progress-bar" style="width: 50%;"></div>
-                        </div>
-                        <a href="#" class="btn-donate small">Doar</a>
-                    </div>
-                    <div class="campaign-card">
-                        <img src="logo.jpeg" alt="Campanha 3">
-                        <h3>Apoio a Idosos</h3>
-                        <p>Ajude a manter um lar de idosos que oferece cuidado e dignidade aos seus residentes.</p>
-                        <div class="progress-bar-container small">
-                            <div class="progress-bar" style="width: 90%;"></div>
-                        </div>
-                        <a href="#" class="btn-donate small">Doar</a>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <section id="how-to-donate-section" style="display:none;">
-            <section class="how-to-donate">
-                <div class="how-to-donate-container">
-                    <h2>Como Doar</h2>
-                    <p>Veja como é fácil ajudar uma causa:</p>
-                    <ol>
-                        <li>
-                            <strong>Escolha uma campanha:</strong>
-                            Navegue pelas campanhas e selecione aquela que deseja apoiar.
-                        </li>
-                        <li>
-                            <strong>Defina o valor:</strong>
-                            Informe o valor que deseja doar.
-                        </li>
-                        <li>
-                            <strong>Selecione o método de pagamento:</strong>
-                            Escolha entre PIX, cartão de crédito ou boleto.
-                        </li>
-                        <li>
-                            <strong>Finalize sua doação:</strong>
-                            Complete o processo e receba a confirmação por e-mail.
-                        </li>
-                    </ol>
-                    <a href="#donationForm" class="btn-donate">Quero Doar Agora</a>
-                </div>
-            </section>
-        </section>
-
-        <section id="transparencia-section" style="display:none;">
-            <section class="transparencia">
-                <div class="transparencia-container">
-                    <h2>Transparência e Prestação de Contas</h2>
-                    <p>Veja como sua doação é utilizada e acompanhe os resultados das campanhas.</p>
-                    <ul class="transparencia-list">
-                        <li>
-                            <strong>Relatórios Financeiros:</strong>
-                            <a href="#">Baixar PDF</a>
-                        </li>
-                        <li>
-                            <strong>Campanhas Finalizadas:</strong>
-                            <a href="#">Ver Resultados</a>
-                        </li>
-                        <li>
-                            <strong>Depoimentos de beneficiados:</strong>
-                            <a href="#">Ver Histórias</a>
-                        </li>
-                        <li>
-                            <strong>Auditoria Independente:</strong>
-                            <a href="#">Saiba Mais</a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </section>
-
-        <section id="login-section" style="display:none;">
-            <div class="login-container">
-                <div class="login-logo">
-                    <img src="logo.jpeg" alt="Logo iDoe" style="width: 80px; margin-bottom: 18px;">
-                </div>
-                <h2>Entrar no iDoe</h2>
-                <form id="loginForm">
-                    <div class="input-group">
-                        <label for="loginEmail">E-mail</label>
-                        <input type="email" id="loginEmail" name="loginEmail" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="loginPassword">Senha</label>
-                        <input type="password" id="loginPassword" name="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn-donate">Entrar</button>
-                </form>
-                <p class="login-register">Ainda não tem conta? <a href="#" id="btn-register">Cadastre-se</a></p>
+                <a href="#" class="text-[#200D00] underline font-medium">Saiba mais sobre o iDoe</a>
+            </div>
+            <div class="flex-1 flex justify-center">
+                <img src="logo.jpeg" alt="Imagem destaque iDoe" class="rounded-2xl shadow-lg w-full max-w-xs object-cover">
             </div>
         </section>
 
-        <section id="register-section" style="display:none;">
-            <div class="register-container">
-                <div class="register-logo">
-                    <img src="logo.jpeg" alt="Logo iDoe" style="width: 80px; margin-bottom: 18px;">
+        <!-- Filtro de campanhas (opcional, para deixar mais parecido) -->
+        <section class="bg-white rounded-xl shadow max-w-5xl mx-auto mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
+            <div class="flex-1 w-full mb-4 md:mb-0">
+                <label class="block text-sm font-semibold mb-2 text-[#200D00]">Buscar campanhas</label>
+                <input type="text" placeholder="O que você está procurando?" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+            </div>
+            <div class="flex-1 w-full mb-4 md:mb-0">
+                <label class="block text-sm font-semibold mb-2 text-[#200D00]">Categoria</label>
+                <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+                    <option>Todas as categorias</option>
+                    <option>Saúde</option>
+                    <option>Animais</option>
+                    <option>Educação</option>
+                </select>
+            </div>
+            <div class="flex-1 w-full">
+                <label class="block text-sm font-semibold mb-2 text-[#200D00]">Localização</label>
+                <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+                    <option>Todas as localizações</option>
+                    <option>SP</option>
+                    <option>RJ</option>
+                    <option>MG</option>
+                </select>
+            </div>
+            <button class="bg-[#200D00] text-white font-bold px-6 py-2 rounded-lg shadow hover:bg-[#140800] transition mt-4 md:mt-0">
+                Buscar
+            </button>
+        </section>
+
+        <!-- Banner campanha destaque -->
+        <section class="bg-white rounded-xl shadow max-w-5xl mx-auto mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
+            <img src="logo.jpeg" alt="Capa da Campanha" class="w-40 h-40 object-cover rounded">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-[#200D00] mb-2">Um Lar para Crianças em Situação de Risco</h1>
+                <p class="text-gray-700 mb-4">Nosso objetivo é arrecadar fundos para a construção de um lar que oferecerá abrigo, alimentação, educação e carinho para crianças desamparadas.</p>
+                <div class="mb-2">
+                    <div class="w-full bg-[var(--secondary-color)] rounded h-3 mb-1">
+                        <div class="bg-[#200D00] h-3 rounded" style="width: 30%;"></div>
+                    </div>
+                    <p class="text-[#200D00] font-bold">R$ 3.000 <span class="text-gray-600 text-sm">de R$ 10.000 arrecadados</span></p>
                 </div>
-                <h2>Cadastre-se no iDoe</h2>
-                <form id="registerForm">
-                    <div class="input-group">
-                        <label for="registerName">Nome</label>
-                        <input type="text" id="registerName" name="registerName" required>
+                <div class="flex gap-6 text-gray-600 text-sm">
+                    <span><strong>300</strong> Doadores</span>
+                    <span><strong>20</strong> Dias Restantes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campanhas sugeridas -->
+        <section class="mb-10">
+            <h2 class="text-center text-2xl font-bold text-[#200D00] mb-6">Campanhas Sugeridas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card campanha 1 -->
+                <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+                    <img src="logo.jpeg" alt="Campanha Abrigo" class="w-full h-32 object-cover rounded mb-3">
+                    <h3 class="text-lg font-semibold text-[#200D00] mb-2">Abrigo para Crianças</h3>
+                    <p class="text-gray-700 mb-2">Ajude a construir um abrigo seguro para crianças em situação de risco.</p>
+                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                        <div class="bg-[#200D00] h-2 rounded" style="width: 60%;"></div>
                     </div>
-                    <div class="input-group">
-                        <label for="registerEmail">E-mail</label>
-                        <input type="email" id="registerEmail" name="registerEmail" required>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 6.000</span> de R$ 10.000</p>
+                    <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
+                </div>
+
+                <!-- Card campanha 2 -->
+                <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+                    <img src="logo.jpeg" alt="Campanha Cestas Básicas" class="w-full h-32 object-cover rounded mb-3">
+                    <h3 class="text-lg font-semibold text-[#200D00] mb-2">Cestas Básicas para Famílias</h3>
+                    <p class="text-gray-700 mb-2">Doe para garantir alimentação a famílias carentes da comunidade.</p>
+                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                        <div class="bg-[#200D00] h-2 rounded" style="width: 80%;"></div>
                     </div>
-                    <div class="input-group">
-                        <label for="registerPassword">Senha</label>
-                        <input type="password" id="registerPassword" name="registerPassword" required>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 8.000</span> de R$ 10.000</p>
+                    <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
+                </div>
+
+                <!-- Card campanha 3 -->
+                <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+                    <img src="logo.jpeg" alt="Campanha Animais" class="w-full h-32 object-cover rounded mb-3">
+                    <h3 class="text-lg font-semibold text-[#200D00] mb-2">Tratamento para Animais</h3>
+                    <p class="text-gray-700 mb-2">Ajude a custear tratamentos veterinários para pets resgatados.</p>
+                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                        <div class="bg-[#200D00] h-2 rounded" style="width: 40%;"></div>
                     </div>
-                    <button type="submit" class="btn-donate">Cadastrar</button>
-                </form>
-                <p class="login-register">Já tem conta? <a href="#" id="voltar-login">Entrar</a></p>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 4.000</span> de R$ 10.000</p>
+                    <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="logo.jpeg" alt="Logo iDoe">
+    <!-- Footer -->
+    <footer class="bg-[#F8F6F6] py-10 mt-16 shadow-lg">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+            <div class="flex items-center gap-3 mb-6 md:mb-0">
+                <img src="logo.jpeg" alt="Logo iDoe" class="h-20 rounded">
             </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="#">Sobre Nós</a></li>
-                    <li><a href="#">Contato</a></li>
-                    <li><a href="#">Termos de Uso</a></li>
-                    <li><a href="#">Política de Privacidade</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <span>Conecte-se conosco:</span>
-            </div>
+            <ul class="flex gap-8 text-base">
+                <li>
+                    <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
+                        
+                        Sobre Nós
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
+                       
+                        Contato
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
+                        
+                        Termos de Uso
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
+                        
+                        Política de Privacidade
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 iDoe. Todos os direitos reservados.</p>
+        <div class="text-center text-sm mt-6 #2A2A2A]">
+            &copy; 2025 iDoe. Todos os direitos reservados.
         </div>
     </footer>
-
     <script>
-        document.getElementById('btn-transparencia').onclick = function () {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'block';
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-        };
-
-        document.getElementById('btn-home').onclick = function () {
-            document.getElementById('home-section').style.display = 'block';
-            document.getElementById('campaign-detail').style.display = 'block';
-            document.getElementById('how-to-donate').style.display = 'block';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-        };
-
-        document.getElementById('btn-campanha').onclick = function () {
-            document.getElementById('home-section').style.display = 'block';
-            document.getElementById('campaign-detail').style.display = 'none';
-            document.getElementById('how-to-donate').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('suggested-campaigns').style.display = 'block';
-        };
-
-        document.getElementById('btn-how-to-donate').onclick = function () {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'block';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-        };
-
-        document.getElementById('btn-login').onclick = function () {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('register-section').style.display = 'none';
-        };
-
-        document.getElementById('btn-register').onclick = function () {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'block';
-        };
-
-        document.getElementById('voltar-login').onclick = function () {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('how-to-donate-section').style.display = 'none';
-            document.getElementById('transparencia-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('register-section').style.display = 'none';
-        };
-
-        document.querySelector('.login-register a').onclick = function (e) {
-            e.preventDefault();
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('register-section').style.display = 'block';
-        };
-        document.getElementById('voltar-login').onclick = function (e) {
-            e.preventDefault();
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('login-section').style.display = 'block';
-        };
-
         const menuToggle = document.getElementById('menu-toggle');
         const sideMenu = document.getElementById('side-menu');
+        const closeMenu = document.getElementById('close-menu');
 
         menuToggle.onclick = function() {
             sideMenu.classList.toggle('open');
         };
 
-        sideMenu.querySelectorAll('a').forEach(link => {
-            link.onclick = () => sideMenu.classList.remove('open');
-        });
+        closeMenu.onclick = function() {
+            sideMenu.classList.remove('open');
+        };
     </script>
 </body>
 
