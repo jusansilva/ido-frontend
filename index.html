@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-[var(--background-color)] #2A2A2A] font-['Roboto',sans-serif]">
+<body class="bg-[#F8F6F6] #2A2A2A] font-['Roboto',sans-serif]">
     <!-- Header fixo -->
     <header class="fixed top-0 left-0 w-full bg-white shadow z-50 border-b border-gray-200">
         <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
@@ -29,16 +29,18 @@
             </button>
         </div>
         <!-- Side menu mobile -->
-        <nav id="side-menu" class="fixed top-0 right-[-250px] w-[220px] h-full bg-white shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col">
+        <nav id="side-menu"
+            class="fixed top-0 right-[-250px] w-[220px] h-full bg-white shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col">
             <div class="flex flex-col items-center px-6 mb-8">
-                <button id="close-menu" class="text-2xl text-[var(--primary-color)] self-end" aria-label="Fechar menu">&times;</button>
+                <button id="close-menu" class="text-2xl text-[#200D00] self-end"
+                    aria-label="Fechar menu">&times;</button>
                 <img src="logo.jpeg" alt="Logo iDoe" class="h-20 mb-4">
             </div>
             <ul class="flex flex-col gap-6 px-6">
-                <li><a href="#" class="font-medium text-[var(--primary-color)]">Início</a></li>
-                <li><a href="#" class="font-medium text-[var(--primary-color)]">Campanhas</a></li>
-                <li><a href="#" class="font-medium text-[var(--primary-color)]">Como Doar</a></li>
-                <li><a href="#" class="font-medium text-[var(--primary-color)]">Transparência</a></li>
+                <li><a href="#" class="font-medium text-[#200D00]">Início</a></li>
+                <li><a href="#" class="font-medium text-[#200D00]">Campanhas</a></li>
+                <li><a href="#" class="font-medium text-[#200D00]">Como Doar</a></li>
+                <li><a href="#" class="font-medium text-[#200D00]">Transparência</a></li>
                 <li><a href="#" class="btn-login">Login</a></li>
             </ul>
         </nav>
@@ -49,39 +51,46 @@
 
     <!-- Conteúdo principal -->
     <main class="max-w-6xl mx-auto px-4 py-8">
-        <!-- Hero Section Inspirado no Vakinha -->
-        <section class="bg-white rounded-xl shadow-lg max-w-5xl mx-auto mt-12 mb-12 p-8 flex flex-col md:flex-row items-center gap-10">
+        <section
+            class="bg-white rounded-xl shadow-lg mt-12 mb-12 p-8 flex flex-col md:flex-row items-center">
             <div class="flex-1">
                 <h1 class="text-3xl md:text-4xl font-bold text-[#200D00] mb-4 leading-tight">
                     Transforme vidas com sua doação!
                 </h1>
                 <p class="text-lg #2A2A2A] mb-6">
-                    Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
+                    Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte
+                    dessa corrente do bem!
                 </p>
                 <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <button class="bg-[#00C48C] text-white font-bold px-6 py-3 rounded-lg shadow transition hover:bg-green-700">
+                    <button
+                        class="bg-[#00C48C] text-white font-bold px-6 py-3 rounded-lg shadow transition hover:bg-green-700">
                         Criar campanha
                     </button>
-                    <button class="border-2 border-[#200D00] text-[#200D00] font-bold px-6 py-3 rounded-lg bg-white hover:bg-[var(--secondary-color)] transition">
+                    <button
+                        class="border-2 border-[#200D00] text-[#200D00] font-bold px-6 py-3 rounded-lg bg-white hover:bg-[#E5E8FF] transition">
                         Quero doar
                     </button>
                 </div>
                 <a href="#" class="text-[#200D00] underline font-medium">Saiba mais sobre o iDoe</a>
             </div>
             <div class="flex-1 flex justify-center">
-                <img src="logo.jpeg" alt="Imagem destaque iDoe" class="rounded-2xl shadow-lg w-full max-w-xs object-cover">
+                <img src="logo.jpeg" alt="Imagem destaque iDoe"
+                    class="rounded-2xl shadow-lg w-full max-w-xs object-cover">
             </div>
         </section>
 
         <!-- Filtro de campanhas (opcional, para deixar mais parecido) -->
-        <section class="bg-white rounded-xl shadow max-w-5xl mx-auto mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
+        <section
+            class="bg-white rounded-xl shadow mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
             <div class="flex-1 w-full mb-4 md:mb-0">
                 <label class="block text-sm font-semibold mb-2 text-[#200D00]">Buscar campanhas</label>
-                <input type="text" placeholder="O que você está procurando?" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+                <input type="text" placeholder="O que você está procurando?"
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
             </div>
             <div class="flex-1 w-full mb-4 md:mb-0">
                 <label class="block text-sm font-semibold mb-2 text-[#200D00]">Categoria</label>
-                <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+                <select
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
                     <option>Todas as categorias</option>
                     <option>Saúde</option>
                     <option>Animais</option>
@@ -90,29 +99,35 @@
             </div>
             <div class="flex-1 w-full">
                 <label class="block text-sm font-semibold mb-2 text-[#200D00]">Localização</label>
-                <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
+                <select
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#200D00]">
                     <option>Todas as localizações</option>
                     <option>SP</option>
                     <option>RJ</option>
                     <option>MG</option>
                 </select>
             </div>
-            <button class="bg-[#200D00] text-white font-bold px-6 py-2 rounded-lg shadow hover:bg-[#140800] transition mt-4 md:mt-0">
+            <button
+                class="bg-[#200D00] text-white font-bold px-6 py-2 rounded-lg shadow hover:bg-[#140800] transition mt-4 md:mt-0">
                 Buscar
             </button>
         </section>
 
         <!-- Banner campanha destaque -->
-        <section class="bg-white rounded-xl shadow max-w-5xl mx-auto mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
+        <section
+            class="bg-white rounded-xl shadow mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
             <img src="logo.jpeg" alt="Capa da Campanha" class="w-40 h-40 object-cover rounded">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-[#200D00] mb-2">Um Lar para Crianças em Situação de Risco</h1>
-                <p class="text-gray-700 mb-4">Nosso objetivo é arrecadar fundos para a construção de um lar que oferecerá abrigo, alimentação, educação e carinho para crianças desamparadas.</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-[#200D00] mb-2">Um Lar para Crianças em Situação de Risco
+                </h1>
+                <p class="text-gray-700 mb-4">Nosso objetivo é arrecadar fundos para a construção de um lar que
+                    oferecerá abrigo, alimentação, educação e carinho para crianças desamparadas.</p>
                 <div class="mb-2">
-                    <div class="w-full bg-[var(--secondary-color)] rounded h-3 mb-1">
+                    <div class="w-full bg-[#E5E8FF] rounded h-3 mb-1">
                         <div class="bg-[#200D00] h-3 rounded" style="width: 30%;"></div>
                     </div>
-                    <p class="text-[#200D00] font-bold">R$ 3.000 <span class="text-gray-600 text-sm">de R$ 10.000 arrecadados</span></p>
+                    <p class="text-[#200D00] font-bold">R$ 3.000 <span class="text-gray-600 text-sm">de R$ 10.000
+                            arrecadados</span></p>
                 </div>
                 <div class="flex gap-6 text-gray-600 text-sm">
                     <span><strong>300</strong> Doadores</span>
@@ -124,16 +139,18 @@
         <!-- Campanhas sugeridas -->
         <section class="mb-10">
             <h2 class="text-center text-2xl font-bold text-[#200D00] mb-6">Campanhas Sugeridas</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 ">
                 <!-- Card campanha 1 -->
                 <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
                     <img src="logo.jpeg" alt="Campanha Abrigo" class="w-full h-32 object-cover rounded mb-3">
                     <h3 class="text-lg font-semibold text-[#200D00] mb-2">Abrigo para Crianças</h3>
-                    <p class="text-gray-700 mb-2">Ajude a construir um abrigo seguro para crianças em situação de risco.</p>
-                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                    <p class="text-gray-700 mb-2">Ajude a construir um abrigo seguro para crianças em situação de risco.
+                    </p>
+                    <div class="w-full bg-[#E5E8FF] rounded h-2 mb-2">
                         <div class="bg-[#200D00] h-2 rounded" style="width: 60%;"></div>
                     </div>
-                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 6.000</span> de R$ 10.000</p>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 6.000</span> de R$
+                        10.000</p>
                     <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
                 </div>
 
@@ -142,10 +159,11 @@
                     <img src="logo.jpeg" alt="Campanha Cestas Básicas" class="w-full h-32 object-cover rounded mb-3">
                     <h3 class="text-lg font-semibold text-[#200D00] mb-2">Cestas Básicas para Famílias</h3>
                     <p class="text-gray-700 mb-2">Doe para garantir alimentação a famílias carentes da comunidade.</p>
-                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                    <div class="w-full bg-[#E5E8FF] rounded h-2 mb-2">
                         <div class="bg-[#200D00] h-2 rounded" style="width: 80%;"></div>
                     </div>
-                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 8.000</span> de R$ 10.000</p>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 8.000</span> de R$
+                        10.000</p>
                     <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
                 </div>
 
@@ -154,14 +172,147 @@
                     <img src="logo.jpeg" alt="Campanha Animais" class="w-full h-32 object-cover rounded mb-3">
                     <h3 class="text-lg font-semibold text-[#200D00] mb-2">Tratamento para Animais</h3>
                     <p class="text-gray-700 mb-2">Ajude a custear tratamentos veterinários para pets resgatados.</p>
-                    <div class="w-full bg-[var(--secondary-color)] rounded h-2 mb-2">
+                    <div class="w-full bg-[#E5E8FF] rounded h-2 mb-2">
                         <div class="bg-[#200D00] h-2 rounded" style="width: 40%;"></div>
                     </div>
-                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 4.000</span> de R$ 10.000</p>
+                    <p class="text-sm text-gray-600 mb-1"><span class="font-bold text-[#200D00]">R$ 4.000</span> de R$
+                        10.000</p>
                     <button class="btn-donate mt-2 transition-transform hover:scale-105">Doar</button>
                 </div>
             </div>
         </section>
+
+        <section id="iniciativas" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 flex-col md:flex-row items-center gap-8 mb-10">
+                <!-- Left: texto -->
+                <div class="flex-1">
+                    <span class="inline-block text-sm font-semibold text-[#00C48C] mb-3">INICIATIVA</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-[#200D00] mb-4 leading-tight">
+                        Nossas iniciativas que transformam comunidades
+                    </h2>
+                    <p class="text-[var(--text-color)] text-gray-700 mb-6">
+                        Programas focados em saúde, educação, assistência a animais e emergência. Trabalhamos com ONGs
+                        locais e voluntários para maximizar impacto e transparência.
+                        Conheça as iniciativas ativas e como apoiar cada uma.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#"
+                            class="inline-flex items-center gap-2 bg-[#00C48C] text-white px-5 py-3 rounded-lg shadow hover:brightness-95 transition">
+                            Conheça as Iniciativas
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 border-2 border-[#200D00] text-[#200D00] px-5 py-3 rounded-lg hover:bg-[#E5E8FF] transition">
+                            Quero Ajudar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: carrossel de logos / iniciativas -->
+                <div class="flex-1">
+                    <div class="relative">
+                        <div id="initiative-track"
+                            class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 hide-scrollbar">
+                            <!-- slide 1 -->
+                            <div
+                                class="min-w-[260px] snap-start bg-white rounded-lg p-6 flex-shrink-0 flex flex-col items-center justify-center border">
+                                <img src="logo.jpeg" alt="Abrigo"
+                                    class="w-40 h-20 object-contain mb-4 grayscale hover:grayscale-0 transition">
+                                <h3 class="text-lg font-semibold text-[#200D00]">Abrigo Esperança</h3>
+                                <p class="text-sm text-gray-600 mt-2 text-center">Acolhimento e cuidado para crianças.
+                                </p>
+                            </div>
+
+                            <!-- slide 2 -->
+                            <div
+                                class="min-w-[260px] snap-start bg-white rounded-lg p-6 flex-shrink-0 flex flex-col items-center justify-center border">
+                                <img src="logo.jpeg" alt="Educação"
+                                    class="w-40 h-20 object-contain mb-4 grayscale hover:grayscale-0 transition">
+                                <h3 class="text-lg font-semibold text-[#200D00]">Aprende+</h3>
+                                <p class="text-sm text-gray-600 mt-2 text-center">Programa de bolsas e material escolar.
+                                </p>
+                            </div>
+
+                            <!-- slide 3 -->
+                            <div
+                                class="min-w-[260px] snap-start bg-white rounded-lg p-6 flex-shrink-0 flex flex-col items-center justify-center border">
+                                <img src="logo.jpeg" alt="Animais"
+                                    class="w-40 h-20 object-contain mb-4 grayscale hover:grayscale-0 transition">
+                                <h3 class="text-lg font-semibold text-[#200D00]">SOS Bichos</h3>
+                                <p class="text-sm text-gray-600 mt-2 text-center">Resgate e tratamento de animais.</p>
+                            </div>
+
+                            <!-- slide 4 -->
+                            <div
+                                class="min-w-[260px] snap-start bg-white rounded-lg p-6 flex-shrink-0 flex flex-col items-center justify-center border">
+                                <img src="logo.jpeg" alt="Emergência"
+                                    class="w-40 h-20 object-contain mb-4 grayscale hover:grayscale-0 transition">
+                                <h3 class="text-lg font-semibold text-[#200D00]">Alerta Solidário</h3>
+                                <p class="text-sm text-gray-600 mt-2 text-center">Respostas rápidas em desastres.</p>
+                            </div>
+                        </div>
+
+                        <!-- controles simples -->
+                        <div class="absolute left-2 top-1/2 -translate-y-1/2 md:block hidden">
+                            <button id="slide-prev" class="bg-white border rounded-full p-2 shadow">‹</button>
+                        </div>
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 md:block hidden">
+                            <button id="slide-next" class="bg-white border rounded-full p-2 shadow">›</button>
+                        </div>
+
+                        <!-- indicadores -->
+                        <div id="dots" class="flex gap-2 justify-center mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // Carrossel simples: cria dots e controla scroll
+            (function () {
+                const track = document.getElementById('initiative-track');
+                const slides = Array.from(track.children);
+                const dotsContainer = document.getElementById('dots');
+
+                slides.forEach((s, i) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'w-2 h-2 rounded-full bg-gray-300';
+                    dot.addEventListener('click', () => {
+                        s.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                const updateDots = () => {
+                    const children = Array.from(dotsContainer.children);
+                    const index = slides.findIndex(sl => {
+                        const rect = sl.getBoundingClientRect();
+                        return rect.left >= 0 && rect.left < window.innerWidth / 2;
+                    });
+                    children.forEach((d, i) => d.classList.toggle('bg-[#200D00]', i === index));
+                    children.forEach((d, i) => d.classList.toggle('bg-gray-300', i !== index));
+                };
+
+                track.addEventListener('scroll', () => {
+                    window.requestAnimationFrame(updateDots);
+                });
+
+                // prev / next
+                const prev = document.getElementById('slide-prev');
+                const next = document.getElementById('slide-next');
+                prev && prev.addEventListener('click', () => {
+                    const idx = Math.max(0, Math.floor(track.scrollLeft / slides[0].offsetWidth) - 1);
+                    slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                });
+                next && next.addEventListener('click', () => {
+                    const idx = Math.min(slides.length - 1, Math.ceil(track.scrollLeft / slides[0].offsetWidth) + 1);
+                    slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                });
+
+                // init
+                updateDots();
+            })();
+        </script>
     </main>
 
     <!-- Footer -->
@@ -173,25 +324,25 @@
             <ul class="flex gap-8 text-base">
                 <li>
                     <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
-                        
+
                         Sobre Nós
                     </a>
                 </li>
                 <li>
                     <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
-                       
+
                         Contato
                     </a>
                 </li>
                 <li>
                     <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
-                        
+
                         Termos de Uso
                     </a>
                 </li>
                 <li>
                     <a href="#" class="hover:underline flex items-center gap-2 #2A2A2A]">
-                        
+
                         Política de Privacidade
                     </a>
                 </li>
@@ -206,11 +357,11 @@
         const sideMenu = document.getElementById('side-menu');
         const closeMenu = document.getElementById('close-menu');
 
-        menuToggle.onclick = function() {
+        menuToggle.onclick = function () {
             sideMenu.classList.toggle('open');
         };
 
-        closeMenu.onclick = function() {
+        closeMenu.onclick = function () {
             sideMenu.classList.remove('open');
         };
     </script>

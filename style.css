@@ -22,10 +22,10 @@ Paleta de Cores
 }
 
 .btn-login {
-  @apply border-2 border-[var(--primary-color)] text-[var(--primary-color)] px-4 py-2 rounded transition hover:bg-[var(--primary-color)] hover:text-white font-semibold;
+  @apply border-2 border-[#200D00] text-[#200D00] px-4 py-2 rounded transition hover:bg-[#200D00] hover:text-white font-semibold;
 }
 .btn-donate {
-  @apply bg-[var(--primary-color)] text-white px-6 py-2 rounded font-semibold hover:bg-[#140800] transition;
+  @apply bg-[#200D00] text-white px-6 py-2 rounded font-semibold hover:bg-[#140800] transition;
 }
 
 /* Adicione ao seu style.css ou dentro de <style> */
@@ -35,3 +35,36 @@ Paleta de Cores
 #side-menu.open {
     right: 0;
 }
+
+/* esconder scrollbar para carrossel (visual) */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* dots estilo */
+#dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  border: none;
+  background: #d1d5db; /* gray-300 */
+}
+#dots button.bg-primary {
+  background: #200D00;
+}
+/* card border sutil */
+#iniciativas .border {
+  border-color: rgba(0,0,0,0.06);
+}
+/* imagens do carrossel com transição */
+#iniciativas img {
+  transition: filter .25s ease, transform .25s ease;
+}
+#iniciativas img:hover {
+  transform: translateY(-4px);
+}
+#iniciativas .btn-primary {}
