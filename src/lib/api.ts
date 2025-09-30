@@ -68,6 +68,19 @@ function getSessionSafe(): Session | null {
 
 export type User = { id: number; name: string; email: string; role: Role };
 export type AuthResponse = { user: User; accessToken: string; refreshToken: string };
+export type Campaign = { id: number; title: string; ownerId: number; closed: boolean; approved: boolean; createdAt: string; updatedAt: string };
+export type Donation = { id: number; amount: number; donorId?: number; campaignId: number; createdAt: string };
+export type Payment = {
+  id: number;
+  method: 'PIX' | 'BOLETO' | 'CREDIT';
+  amount: number;
+  providerTransactionId?: string;
+  pixQrCode?: string;
+  pixCode?: string;
+  boletoUrl?: string;
+  boletoDigitableLine?: string;
+  status: 'PENDING' | 'CONFIRMED' | 'FAILED' | 'CANCELED';
+};
 
 export const api = {
   login: (email: string, password: string) =>
@@ -94,5 +107,32 @@ export const api = {
     } finally {
       clearSession();
     }
+  },
+  campaigns: {
+    list: () => request<Campaign[]>('/campaigns', { method: 'GET' }),
+    get: (id: number) => request<Campaign>(`/campaigns/${id}`, { method: 'GET' }),
+    create: (title: string) => request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify({ title }) }),
+  },
+  admin: {
+    campaigns: (status?: 'pending' | 'approved' | 'all') => request<Campaign[]>(`/admin/campaigns${status ? `?status=${status}` : ''}`, { method: 'GET' }),
+    moderateCampaign: (id: number, approved: boolean) => request<Campaign>(`/admin/campaigns/${id}/moderate`, { method: 'PATCH', body: JSON.stringify({ approved }) }),
+    dashboard: () => request<{ usersCount: number; campaignsCount: number; donationsCount: number; recentCampaigns: Campaign[]; recentUsers: { id: number; name: string; email: string; createdAt: string; role: string }[]; recentDonations: { id: number; amount: number; campaignId: number; createdAt: string }[] }>('/admin/dashboard', { method: 'GET' }),
+  },
+  donations: {
+    mine: () => request<Donation[]>('/donations', { method: 'GET' }),
+    byCampaign: (id: number) => request<Donation[]>(`/donations/campaign/${id}`, { method: 'GET' }),
+  },
+  payments: {
+    create: (
+      campaignId: number,
+      amount: number,
+      method: 'PIX' | 'BOLETO' | 'CREDIT',
+      creditCard?: (
+        { holder: string; number: string; expMonth: number; expYear: number; cvv: string; installments?: number } |
+        { token: string; installments?: number }
+      )
+    ) =>
+      request<Payment>('/payments', { method: 'POST', body: JSON.stringify({ campaignId, amount, method, creditCard }) }),
+    status: (id: number) => request<{ status: Payment['status']; paidAt?: string }>(`/payments/${id}/status`, { method: 'GET' }),
   },
 };

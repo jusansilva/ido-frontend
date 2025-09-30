@@ -54,7 +54,7 @@ export default function RegisterPage() {
         setToast({ type: 'success', message: 'Cadastro realizado! Faça login.' });
         setTimeout(() => router.push('/login'), 900);
       }
-    } catch (_err) {
+    } catch {
       setToast({ type: 'error', message: 'Erro ao cadastrar. Tente novamente.' });
     }
   }

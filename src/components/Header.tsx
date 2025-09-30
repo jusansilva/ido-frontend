@@ -42,10 +42,10 @@ export default function Header() {
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto md:h-20" priority />
         </div>
         <nav className="hidden md:flex gap-8">
-          <a href="#" className="font-medium hover:text-primary">Início</a>
-          <a href="#" className="font-medium hover:text-primary">Campanhas</a>
-          <a href="#" className="font-medium hover:text-primary">Como Doar</a>
-          <a href="#" className="font-medium hover:text-primary">Transparência</a>
+          <Link href="/" className="font-medium hover:text-primary">Início</Link>
+          <Link href="/campaigns" className="font-medium hover:text-primary">Campanhas</Link>
+          <Link href="/como-doar" className="font-medium hover:text-primary">Como Doar</Link>
+          <Link href="/transparencia" className="font-medium hover:text-primary">Transparência</Link>
           {name ? (
             <div className="flex items-center gap-3">
               {role === 'ADMIN' && (
@@ -53,6 +53,7 @@ export default function Header() {
                   Admin
                 </Link>
               )}
+              <Link href="/campaigns/new" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">Nova campanha</Link>
               <span className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</span>
               <button onClick={handleLogout} className="inline-flex items-center font-medium px-3 py-2 rounded-lg bg-primary text-white hover:opacity-90">
                 Sair
@@ -86,10 +87,10 @@ export default function Header() {
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto mb-4" />
         </div>
         <ul className="flex flex-col gap-6 px-6">
-          <li><a href="#" className="font-medium text-primary">Início</a></li>
-          <li><a href="#" className="font-medium text-primary">Campanhas</a></li>
-          <li><a href="#" className="font-medium text-primary">Como Doar</a></li>
-          <li><a href="#" className="font-medium text-primary">Transparência</a></li>
+          <li><Link href="/" className="font-medium text-primary">Início</Link></li>
+          <li><Link href="/campaigns" className="font-medium text-primary">Campanhas</Link></li>
+          <li><Link href="/como-doar" className="font-medium text-primary">Como Doar</Link></li>
+          <li><Link href="/transparencia" className="font-medium text-primary">Transparência</Link></li>
           {name ? (
             <>
               {role === 'ADMIN' && (

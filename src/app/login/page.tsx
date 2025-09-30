@@ -34,7 +34,7 @@ export default function LoginPage() {
       setToast({ type: 'success', message: 'Login realizado com sucesso!' });
       const to = res?.user?.role === 'ADMIN' ? '/admin' : '/';
       setTimeout(() => router.push(to), 800);
-    } catch (_err) {
+    } catch {
       setToast({ type: 'error', message: 'Erro ao entrar. Tente novamente.' });
     }
   }

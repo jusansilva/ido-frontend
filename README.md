@@ -18,9 +18,11 @@ Como rodar
 - Start: `npm start`
 
 Ambiente (.env.local)
-- Opcional:
-  - `API_PROXY_TARGET=http://localhost:4000` (proxy de `/api/*`)
-  - `NEXT_PUBLIC_API_BASE_URL=/api` (padrão). Troque para URL do backend se não quiser proxy
+- Copie o exemplo: `cp .env.local.example .env.local`
+- Edite conforme sua necessidade:
+  - `NEXT_PUBLIC_API_BASE_URL=http://localhost:4000` para o frontend chamar o backend diretamente (sem proxy).
+  - Ou remova/comente `NEXT_PUBLIC_API_BASE_URL` e use o proxy: `API_PROXY_TARGET=http://localhost:4000` (tudo que for `/api/*` no Next será redirecionado).
+  - Se nada for definido, o client usa por padrão `NEXT_PUBLIC_API_BASE_URL=/api` e as requisições passam pelo proxy do Next.
 
 Estrutura principal
 - Home: `src/app/page.tsx`
