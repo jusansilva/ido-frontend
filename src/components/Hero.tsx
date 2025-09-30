@@ -31,7 +31,7 @@ export default function Hero() {
             Quero doar
           </button>
         </div>
-        <a href="#" className="text-primary underline font-medium">Saiba mais sobre o iDoe</a>
+        <a href="/sobre" className="text-primary underline font-medium">Saiba mais sobre o iDoe</a>
       </div>
       <div className="flex-1 flex justify-center">
         <Image src="/logo.jpeg" alt="Imagem destaque iDoe" width={320} height={320} className="rounded-2xl shadow-lg w-full max-w-xs h-auto object-cover" />

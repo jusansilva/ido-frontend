@@ -45,6 +45,7 @@ export default function Header() {
           <Link href="/" className="font-medium hover:text-primary">Início</Link>
           <Link href="/campaigns" className="font-medium hover:text-primary">Campanhas</Link>
           <Link href="/como-doar" className="font-medium hover:text-primary">Como Doar</Link>
+          <Link href="/sobre" className="font-medium hover:text-primary">Sobre</Link>
           <Link href="/transparencia" className="font-medium hover:text-primary">Transparência</Link>
           {name ? (
             <div className="flex items-center gap-3">
@@ -90,6 +91,7 @@ export default function Header() {
           <li><Link href="/" className="font-medium text-primary">Início</Link></li>
           <li><Link href="/campaigns" className="font-medium text-primary">Campanhas</Link></li>
           <li><Link href="/como-doar" className="font-medium text-primary">Como Doar</Link></li>
+          <li><Link href="/sobre" className="font-medium text-primary">Sobre</Link></li>
           <li><Link href="/transparencia" className="font-medium text-primary">Transparência</Link></li>
           {name ? (
             <>

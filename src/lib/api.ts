@@ -112,6 +112,7 @@ export const api = {
     list: () => request<Campaign[]>('/campaigns', { method: 'GET' }),
     get: (id: number) => request<Campaign>(`/campaigns/${id}`, { method: 'GET' }),
     create: (title: string) => request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify({ title }) }),
+    report: (id: number) => request<{ count: number; total: number; average: number; donorsCount: number; lastDonationAt: string | null }>(`/campaigns/${id}/report`, { method: 'GET' }),
   },
   admin: {
     campaigns: (status?: 'pending' | 'approved' | 'all') => request<Campaign[]>(`/admin/campaigns${status ? `?status=${status}` : ''}`, { method: 'GET' }),
