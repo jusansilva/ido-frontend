@@ -1,18 +1,66 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getSession } from '@/lib/auth';
+import { api } from '@/lib/api';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState<string | null>(null);
+  const [role, setRole] = useState<'USER' | 'ADMIN' | null>(null);
+
+  useEffect(() => {
+    const s = getSession();
+    setName(s?.user?.name || null);
+    setRole(s?.user?.role ?? null);
+    const onStorage = () => {
+      const ss = getSession();
+      setName(ss?.user?.name || null);
+      setRole(ss?.user?.role ?? null);
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  async function handleLogout() {
+    try {
+      await api.logout();
+    } finally {
+      // Força atualização de estado local
+      setName(null);
+      setRole(null);
+      // Redirecionamento simples via location
+      window.location.href = '/';
+    }
+  }
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow z-50 border-b border-gray-200">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <img src="/logo.jpeg" alt="Logo iDoe" className="h-20 md:h-20" />
+          <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto md:h-20" priority />
         </div>
         <nav className="hidden md:flex gap-8">
           <a href="#" className="font-medium hover:text-primary">Início</a>
-          {/* Outros links */}
+          <a href="#" className="font-medium hover:text-primary">Campanhas</a>
+          <a href="#" className="font-medium hover:text-primary">Como Doar</a>
+          <a href="#" className="font-medium hover:text-primary">Transparência</a>
+          {name ? (
+            <div className="flex items-center gap-3">
+              {role === 'ADMIN' && (
+                <Link href="/admin" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">
+                  Admin
+                </Link>
+              )}
+              <span className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</span>
+              <button onClick={handleLogout} className="inline-flex items-center font-medium px-3 py-2 rounded-lg bg-primary text-white hover:opacity-90">
+                Sair
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-secondary">Login</Link>
+          )}
         </nav>
         <button
           id="menu-toggle"
@@ -35,11 +83,26 @@ export default function Header() {
           >
             &times;
           </button>
-          <img src="/logo.jpeg" alt="Logo iDoe" className="h-20 mb-4" />
+          <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto mb-4" />
         </div>
         <ul className="flex flex-col gap-6 px-6">
           <li><a href="#" className="font-medium text-primary">Início</a></li>
-          {/* Outros itens */}
+          <li><a href="#" className="font-medium text-primary">Campanhas</a></li>
+          <li><a href="#" className="font-medium text-primary">Como Doar</a></li>
+          <li><a href="#" className="font-medium text-primary">Transparência</a></li>
+          {name ? (
+            <>
+              {role === 'ADMIN' && (
+                <li><Link href="/admin" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary">Admin</Link></li>
+              )}
+              <li className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</li>
+              <li>
+                <button onClick={handleLogout} className="inline-flex items-center font-medium px-4 py-2 rounded-lg bg-primary text-white">Sair</button>
+              </li>
+            </>
+          ) : (
+            <li><Link href="/login" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary">Login</Link></li>
+          )}
         </ul>
       </nav>
     </header>

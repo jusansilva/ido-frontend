@@ -1,18 +1,23 @@
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+
+/* Tell Tailwind where to scan for classes (v4) */
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
 
 /* Seu CSS customizado aqui, se houver */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8F6F6; /* page bg from index.html */
+  --foreground: #2A2A2A; /* base text color from index.html */
 }
 
 @theme inline {
+  --color-primary: #200D00;
+  --color-secondary: #E5E8FF;
+  --color-text: #2A2A2A;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-success: #00C48C;
+  --color-error: #FF5A5F;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,3 +32,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

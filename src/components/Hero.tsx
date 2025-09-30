@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import Modal from './Modal';
+import Image from 'next/image';
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Hero() {
           Transforme vidas com sua doação!
         </h1>
         <p className="text-lg text-text mb-6">
-          Milhares de pessoas já confiaram no iDoe...
+          Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
         </p>
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <button
@@ -28,7 +29,7 @@ export default function Hero() {
         <a href="#" className="text-primary underline font-medium">Saiba mais sobre o iDoe</a>
       </div>
       <div className="flex-1 flex justify-center">
-        <img src="/logo.jpeg" alt="Imagem destaque iDoe" className="rounded-2xl shadow-lg w-full max-w-xs object-cover" />
+        <Image src="/logo.jpeg" alt="Imagem destaque iDoe" width={320} height={320} className="rounded-2xl shadow-lg w-full max-w-xs h-auto object-cover" />
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
