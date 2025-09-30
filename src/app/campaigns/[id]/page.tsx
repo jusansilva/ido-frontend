@@ -13,6 +13,10 @@ export default function CampaignDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const session = getSession();
   const isLogged = !!session;
+  const isAdmin = session?.user?.role === 'ADMIN';
+  const [moderating, setModerating] = useState<null | 'approve' | 'reject'>(null);
+  const [modError, setModError] = useState<string | null>(null);
+  const [modSuccess, setModSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -39,8 +43,62 @@ export default function CampaignDetailPage() {
         {error && <p className="text-error">{error}</p>}
         {campaign && (
           <>
-            <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">{campaign.title}</h1>
-            <p className="text-sm text-gray-600 mb-6">Status: {campaign.closed ? 'Encerrada' : 'Aberta'}</p>
+            <a href="/campaigns" className="inline-flex items-center text-sm text-primary underline mb-2">← Voltar</a>
+            <h1 className="text-2xl md:text-3xl font-bold text-primary mb-2">{campaign.title}</h1>
+            <p className="text-sm text-gray-600 mb-2">Status: {campaign.closed ? 'Encerrada' : 'Aberta'}</p>
+            {modSuccess && (
+              <div className="mb-4 rounded bg-green-50 border border-green-200 text-green-800 px-3 py-2 text-sm">
+                {modSuccess}
+              </div>
+            )}
+            {isAdmin && (
+              <div className="bg-white rounded-lg shadow p-4 mb-6">
+                <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <p className="text-sm">Aprovação: <span className="font-semibold">{campaign.approved === true ? 'Aprovada' : campaign.approved === false ? 'Pendente' : 'Desconhecida'}</span></p>
+                  <div className="flex gap-3">
+                    <button
+                      className="px-4 py-2 rounded-lg border border-green-600 text-green-700 hover:bg-green-50 disabled:opacity-60"
+                      disabled={!!moderating}
+                      onClick={async () => {
+                        setModError(null);
+                        setModSuccess(null);
+                        setModerating('approve');
+                        try {
+                          await api.admin.moderateCampaign(Number(id), true);
+                          const c = await api.campaigns.get(Number(id));
+                          setCampaign(c);
+                          setModSuccess('Campanha aprovada com sucesso.');
+                        } catch (e: any) {
+                          setModError(e?.message || 'Falha ao aprovar');
+                        } finally {
+                          setModerating(null);
+                        }
+                      }}
+                    >Aprovar</button>
+                    <button
+                      className="px-4 py-2 rounded-lg border border-red-600 text-red-700 hover:bg-red-50 disabled:opacity-60"
+                      disabled={!!moderating}
+                      onClick={async () => {
+                        setModError(null);
+                        setModSuccess(null);
+                        setModerating('reject');
+                        try {
+                          await api.admin.moderateCampaign(Number(id), false);
+                          const c = await api.campaigns.get(Number(id));
+                          setCampaign(c);
+                          setModSuccess('Campanha marcada como pendente.');
+                        } catch (e: any) {
+                          setModError(e?.message || 'Falha ao reprovar');
+                        } finally {
+                          setModerating(null);
+                        }
+                      }}
+                    >Reprovar</button>
+                  </div>
+                </div>
+                {modError && <p className="text-error mt-2">{modError}</p>}
+              </div>
+            )}
 
             {!isLogged ? (
               <div className="bg-white rounded-lg shadow p-4">

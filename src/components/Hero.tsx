@@ -1,10 +1,12 @@
 "use client";
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Modal from './Modal';
 import Image from 'next/image';
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <section className="bg-white rounded-xl shadow-lg mt-12 mb-12 p-8 flex flex-col md:flex-row items-center">
@@ -22,7 +24,10 @@ export default function Hero() {
           >
             Criar campanha
           </button>
-          <button className="border-2 border-primary text-primary font-bold px-6 py-3 rounded-lg bg-white hover:bg-secondary">
+          <button
+            className="border-2 border-primary text-primary font-bold px-6 py-3 rounded-lg bg-white hover:bg-secondary"
+            onClick={() => router.push('/campaigns')}
+          >
             Quero doar
           </button>
         </div>

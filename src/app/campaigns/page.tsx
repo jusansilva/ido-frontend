@@ -8,10 +8,13 @@ import { getSession } from '@/lib/auth';
 export default function CampaignsPage() {
   const session = getSession();
   const isLogged = !!session;
+  const isAdmin = session?.user?.role === 'ADMIN';
   const userId = session?.user?.id;
 
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [donations, setDonations] = useState<Donation[]>([]);
+  const [adminPending, setAdminPending] = useState<Campaign[]>([]);
+  const [adminApproved, setAdminApproved] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,13 +24,24 @@ export default function CampaignsPage() {
       setLoading(true);
       setError(null);
       try {
-        const [cs, ds] = await Promise.all([
-          api.campaigns.list(),
-          isLogged ? api.donations.mine() : Promise.resolve([] as Donation[]),
-        ]);
-        if (!cancelled) {
-          setCampaigns(cs);
-          setDonations(ds as Donation[]);
+        if (isAdmin) {
+          const [p, a] = await Promise.all([
+            api.admin.campaigns('pending'),
+            api.admin.campaigns('approved'),
+          ]);
+          if (!cancelled) {
+            setAdminPending(p || []);
+            setAdminApproved(a || []);
+          }
+        } else {
+          const [cs, ds] = await Promise.all([
+            api.campaigns.list(),
+            isLogged ? api.donations.mine() : Promise.resolve([] as Donation[]),
+          ]);
+          if (!cancelled) {
+            setCampaigns(cs);
+            setDonations(ds as Donation[]);
+          }
         }
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : 'Erro ao carregar dados';
@@ -38,7 +52,7 @@ export default function CampaignsPage() {
     }
     load();
     return () => { cancelled = true; };
-  }, [isLogged]);
+  }, [isLogged, isAdmin]);
 
   const openCampaigns = useMemo(() => campaigns.filter(c => !c.closed && c.approved), [campaigns]);
   const myCampaigns = useMemo(() => campaigns.filter(c => userId && c.ownerId === userId) as Campaign[], [campaigns, userId]);
@@ -53,7 +67,21 @@ export default function CampaignsPage() {
         {loading && <p>Carregando...</p>}
         {error && <p className="text-error">{error}</p>}
 
-        {!loading && !isLogged && (
+        {!loading && isAdmin && (
+          <div className="space-y-10">
+            <section className="space-y-4">
+              <h2 className="text-xl font-semibold text-primary">Para aprovar</h2>
+              <p className="text-sm text-gray-700">Campanhas aguardando aprovação.</p>
+              <CampaignsGrid items={adminPending} emptyText="Nenhuma campanha pendente." />
+            </section>
+            <section className="space-y-4">
+              <h2 className="text-xl font-semibold text-primary">Aprovadas</h2>
+              <CampaignsGrid items={adminApproved} emptyText="Nenhuma campanha aprovada ainda." />
+            </section>
+          </div>
+        )}
+
+        {!loading && !isAdmin && !isLogged && (
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-primary">Campanhas aprovadas</h2>
             <p className="text-sm text-gray-700">Mostrando campanhas abertas.</p>
@@ -61,7 +89,7 @@ export default function CampaignsPage() {
           </section>
         )}
 
-        {!loading && isLogged && (
+        {!loading && !isAdmin && isLogged && (
           <div className="space-y-10">
             <section className="space-y-4">
               <h2 className="text-xl font-semibold text-primary">Minhas campanhas</h2>
