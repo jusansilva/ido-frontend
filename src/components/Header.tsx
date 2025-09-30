@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { getSession } from '@/lib/auth';
 import { api } from '@/lib/api';
 
@@ -9,6 +10,19 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState<string | null>(null);
   const [role, setRole] = useState<'USER' | 'ADMIN' | null>(null);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    if (!pathname) return false;
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  }
+
+  function navClass(href: string) {
+    const base = 'font-medium px-3 py-2 rounded hover:text-primary';
+    const active = isActive(href) ? ' bg-secondary text-primary border border-primary' : '';
+    return base + active;
+  }
 
   useEffect(() => {
     const s = getSession();
@@ -42,19 +56,21 @@ export default function Header() {
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto md:h-20" priority />
         </div>
         <nav className="hidden md:flex gap-8">
-          <Link href="/" className="font-medium hover:text-primary">Início</Link>
-          <Link href="/campaigns" className="font-medium hover:text-primary">Campanhas</Link>
-          <Link href="/como-doar" className="font-medium hover:text-primary">Como Doar</Link>
-          <Link href="/sobre" className="font-medium hover:text-primary">Sobre</Link>
-          <Link href="/transparencia" className="font-medium hover:text-primary">Transparência</Link>
+          <Link href="/" className={navClass('/')}>Início</Link>
+          <Link href="/campaigns" className={navClass('/campaigns')}>Campanhas</Link>
+          <Link href="/como-doar" className={navClass('/como-doar')}>Como Doar</Link>
+          <Link href="/sobre" className={navClass('/sobre')}>Sobre</Link>
+          <Link href="/transparencia" className={navClass('/transparencia')}>Transparência</Link>
           {name ? (
             <div className="flex items-center gap-3">
               {role === 'ADMIN' && (
-                <Link href="/admin" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">
+                <Link href="/admin" className={navClass('/admin')}>
                   Admin
                 </Link>
               )}
-              <Link href="/campaigns/new" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">Nova campanha</Link>
+              {role !== 'ADMIN' && (
+                <Link href="/campaigns/new" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">Nova campanha</Link>
+              )}
               <span className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</span>
               <button onClick={handleLogout} className="inline-flex items-center font-medium px-3 py-2 rounded-lg bg-primary text-white hover:opacity-90">
                 Sair
@@ -87,16 +103,19 @@ export default function Header() {
           </button>
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto mb-4" />
         </div>
-        <ul className="flex flex-col gap-6 px-6">
-          <li><Link href="/" className="font-medium text-primary">Início</Link></li>
-          <li><Link href="/campaigns" className="font-medium text-primary">Campanhas</Link></li>
-          <li><Link href="/como-doar" className="font-medium text-primary">Como Doar</Link></li>
-          <li><Link href="/sobre" className="font-medium text-primary">Sobre</Link></li>
-          <li><Link href="/transparencia" className="font-medium text-primary">Transparência</Link></li>
+        <ul className="flex flex-col gap-4 px-6">
+          <li><Link href="/" className={`font-medium block rounded px-3 py-2 ${isActive('/') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Início</Link></li>
+          <li><Link href="/campaigns" className={`font-medium block rounded px-3 py-2 ${isActive('/campaigns') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Campanhas</Link></li>
+          <li><Link href="/como-doar" className={`font-medium block rounded px-3 py-2 ${isActive('/como-doar') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Como Doar</Link></li>
+          <li><Link href="/sobre" className={`font-medium block rounded px-3 py-2 ${isActive('/sobre') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Sobre</Link></li>
+          <li><Link href="/transparencia" className={`font-medium block rounded px-3 py-2 ${isActive('/transparencia') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Transparência</Link></li>
           {name ? (
             <>
               {role === 'ADMIN' && (
                 <li><Link href="/admin" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary">Admin</Link></li>
+              )}
+              {role !== 'ADMIN' && (
+                <li><Link href="/campaigns/new" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary">Nova campanha</Link></li>
               )}
               <li className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</li>
               <li>

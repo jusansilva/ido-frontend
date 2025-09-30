@@ -35,25 +35,38 @@ export default function CampaignList() {
     let cancelled = false;
     (async () => {
       try {
-        const list = await api.campaigns.list();
-        const candidates = (Array.isArray(list) ? list : [])
-          .filter((c: ApiCampaign) => !c.closed && c.approved !== false);
-        const top = candidates.slice(0, 3);
-        // Enrich with report totals (raised in R$)
-        const enriched = await Promise.all(
-          top.map(async (c) => {
-            try {
-              const r = await api.campaigns.report(c.id);
-              const raised = Math.max(0, Math.round((r?.total || 0) / 100));
-              return toCard(c, raised);
-            } catch {
-              return toCard(c);
-            }
-          })
-        );
-        const filled = fillWithMocks(enriched, 3);
+        const initiatives = await api.initiatives.list().catch(() => []);
+        const iniCards: Campaign[] = (initiatives as any[]).slice(0, 3).map((i: any) => ({
+          id: undefined,
+          title: String(i.title || ''),
+          description: String(i.description || ''),
+          image: String(i.imageUrl || '/logo.jpeg'),
+          raised: 0,
+          goal: 10000,
+        }));
+
+        let filled: Campaign[] = iniCards;
+        if (iniCards.length < 3) {
+          const list = await api.campaigns.list();
+          const candidates = (Array.isArray(list) ? list : [])
+            .filter((c: ApiCampaign) => !c.closed && c.approved !== false);
+          const top = candidates.slice(0, 3 - iniCards.length);
+          const enriched = await Promise.all(
+            top.map(async (c) => {
+              try {
+                const r = await api.campaigns.report(c.id);
+                const raised = Math.max(0, Math.round((r?.total || 0) / 100));
+                return toCard(c, raised);
+              } catch {
+                return toCard(c);
+              }
+            })
+          );
+          filled = [...iniCards, ...enriched];
+        }
+        const completed = fillWithMocks(filled, 3);
         if (!cancelled) {
-          setItems(filled);
+          setItems(completed);
           setLoaded(true);
         }
       } catch {

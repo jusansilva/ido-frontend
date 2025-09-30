@@ -114,10 +114,23 @@ export const api = {
     create: (title: string) => request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify({ title }) }),
     report: (id: number) => request<{ count: number; total: number; average: number; donorsCount: number; lastDonationAt: string | null }>(`/campaigns/${id}/report`, { method: 'GET' }),
   },
+  initiatives: {
+    list: () => request<{ id: number; title: string; description: string; imageUrl: string; sortOrder: number; createdAt: string; updatedAt: string }[]>(`/initiatives`, { method: 'GET' }),
+  },
   admin: {
     campaigns: (status?: 'pending' | 'approved' | 'all') => request<Campaign[]>(`/admin/campaigns${status ? `?status=${status}` : ''}`, { method: 'GET' }),
     moderateCampaign: (id: number, approved: boolean) => request<Campaign>(`/admin/campaigns/${id}/moderate`, { method: 'PATCH', body: JSON.stringify({ approved }) }),
     dashboard: () => request<{ usersCount: number; campaignsCount: number; donationsCount: number; recentCampaigns: Campaign[]; recentUsers: { id: number; name: string; email: string; createdAt: string; role: string }[]; recentDonations: { id: number; amount: number; campaignId: number; createdAt: string }[] }>('/admin/dashboard', { method: 'GET' }),
+    initiatives: {
+      create: (payload: { title: string; description: string; imageUrl: string; sortOrder?: number }) =>
+        request(`/admin/initiatives`, { method: 'POST', body: JSON.stringify(payload) }),
+      update: (id: number, payload: Partial<{ title: string; description: string; imageUrl: string; sortOrder: number }>) =>
+        request(`/admin/initiatives/${id}`, { method: 'PATCH', body: JSON.stringify(payload) }),
+      delete: (id: number) =>
+        request(`/admin/initiatives/${id}`, { method: 'DELETE' }),
+      getUploadUrl: (filename: string, contentType: string) =>
+        request<{ url: string; key: string; publicUrl?: string }>(`/admin/initiatives/upload-url`, { method: 'POST', body: JSON.stringify({ filename, contentType }) }),
+    },
   },
   donations: {
     mine: () => request<Donation[]>('/donations', { method: 'GET' }),
