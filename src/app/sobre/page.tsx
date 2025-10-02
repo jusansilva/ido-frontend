@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 export default function SobrePage() {
   return (
@@ -36,7 +37,7 @@ export default function SobrePage() {
           <h2 className="text-2xl font-semibold text-primary">Transparência</h2>
           <p>
             O iDoe oferece relatórios por campanha com total arrecadado, média de doações e quantidade de doadores.
-            Acesse a página de <a className="text-primary underline" href="/transparencia">Transparência</a> para saber mais.
+            Acesse a página de <Link className="text-primary underline" href="/transparencia">Transparência</Link> para saber mais.
           </p>
         </section>
 
@@ -69,8 +70,8 @@ export default function SobrePage() {
         <section className="text-center space-y-4">
           <h2 className="text-2xl font-semibold text-primary">Comece agora</h2>
           <div className="flex gap-3 justify-center">
-            <a href="/campaigns/new" className="px-5 py-3 rounded-lg bg-primary text-white">Criar campanha</a>
-            <a href="/campaigns" className="px-5 py-3 rounded-lg border border-primary text-primary">Ver campanhas</a>
+            <Link href="/campaigns/new" className="px-5 py-3 rounded-lg bg-primary text-white">Criar campanha</Link>
+            <Link href="/campaigns" className="px-5 py-3 rounded-lg border border-primary text-primary">Ver campanhas</Link>
           </div>
         </section>
       </main>
@@ -78,4 +79,3 @@ export default function SobrePage() {
     </div>
   );
 }
-

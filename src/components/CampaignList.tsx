@@ -35,8 +35,8 @@ export default function CampaignList() {
     let cancelled = false;
     (async () => {
       try {
-        const initiatives = await api.initiatives.list().catch(() => []);
-        const iniCards: Campaign[] = (initiatives as any[]).slice(0, 3).map((i: any) => ({
+        const initiatives = await api.initiatives.list().catch(() => [] as { id: number; title: string; description: string; imageUrl: string }[]);
+        const iniCards: Campaign[] = initiatives.slice(0, 3).map((i) => ({
           id: undefined,
           title: String(i.title || ''),
           description: String(i.description || ''),

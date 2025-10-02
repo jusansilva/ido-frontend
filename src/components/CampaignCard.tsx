@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 export default function CampaignCard({ campaign }: { campaign: Campaign }) {
   const percent = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100));
-  const href = typeof campaign.id === 'number' ? `/campaigns/${campaign.id}` : `/campaigns`;
+  const href = typeof campaign.id === 'number' ? `/campaigns/view?id=${campaign.id}` : `/campaigns`;
   return (
     <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center">
       <Link href={href} className="relative w-full h-32 rounded mb-3 overflow-hidden block">

@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getSession } from '@/lib/auth';
 import { api, type Campaign } from '@/lib/api';
+import type React from 'react';
 
 export default function AdminPage() {
   const router = useRouter();
@@ -28,6 +29,7 @@ export default function AdminPage() {
   const [initError, setInitError] = useState<string | null>(null);
   const [orderDirty, setOrderDirty] = useState<boolean>(false);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [uploadFiles, setUploadFiles] = useState<Record<number, File | null>>({});
 
   useEffect(() => {
     const s = getSession();
@@ -55,8 +57,9 @@ export default function AdminPage() {
             const inis = await api.initiatives.list();
             const sorted = [...inis].sort((a,b)=> (a.sortOrder??0)-(b.sortOrder??0) || a.id-b.id);
             setInitiatives(sorted);
-          } catch (e: any) {
-            setInitError(e?.message || 'Falha ao carregar iniciativas');
+          } catch (e: unknown) {
+            const msg = e instanceof Error ? e.message : 'Falha ao carregar iniciativas';
+            setInitError(msg);
           } finally {
             setInitLoading(false);
           }
@@ -113,8 +116,9 @@ export default function AdminPage() {
                     setCampaignsCount(dash.campaignsCount);
                     setDonationsCount(dash.donationsCount);
                     setRecent({ campaigns: dash.recentCampaigns, donations: dash.recentDonations, users: dash.recentUsers });
-                  } catch (err: any) {
-                    setCreateError(err?.message || 'Falha ao criar iniciativa');
+                  } catch (err: unknown) {
+                    const msg = err instanceof Error ? err.message : 'Falha ao criar iniciativa';
+                    setCreateError(msg);
                   } finally {
                     setCreating(false);
                   }
@@ -122,7 +126,7 @@ export default function AdminPage() {
               >
                 <label className="text-sm">
                   Imagem (arquivo)
-                  <input type="file" accept="image/*" onChange={(e)=> setNewImageFile(e.target.files?.[0] || null)} className="mt-1 w-full" />
+                  <input type="file" accept="image/*" onChange={(e: React.ChangeEvent<HTMLInputElement>)=> setNewImageFile(e.target.files?.[0] || null)} className="mt-1 w-full" />
                 </label>
                 <label className="text-sm">
                   Título
@@ -223,6 +227,7 @@ export default function AdminPage() {
                             <span className="cursor-move select-none text-gray-500">☰</span>
                           </td>
                           <td className="px-3 py-2">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={ini.imageUrl} alt="img" className="w-16 h-16 object-cover rounded" />
                           </td>
                           <td className="px-3 py-2 min-w-56">
@@ -230,13 +235,20 @@ export default function AdminPage() {
                           </td>
                           <td className="px-3 py-2 min-w-72">
                             <textarea defaultValue={ini.description} onChange={(e)=> ini.description=e.target.value} className="w-full border rounded px-2 py-1" rows={2} />
-                            <input type="file" accept="image/*" onChange={(e:any)=> (ini as any).__file = (e.target.files?.[0] || null)} className="mt-1 w-full" />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setUploadFiles((prev) => ({ ...prev, [ini.id]: e.target.files?.[0] ?? null }))
+                              }
+                              className="mt-1 w-full"
+                            />
                           </td>
                           <td className="px-3 py-2">
                             <div className="flex flex-col gap-2">
                               <button className="px-3 py-1 rounded bg-primary text-white" onClick={async ()=>{
                                 let imageUrl: string | undefined = undefined;
-                                const f: File | undefined = (ini as any).__file;
+                                const f: File | undefined = uploadFiles[ini.id] || undefined;
                                 if (f) {
                                   const up = await api.admin.initiatives.getUploadUrl(f.name, f.type || 'application/octet-stream');
                                   await fetch(up.url, { method: 'PUT', headers: { 'Content-Type': f.type || 'application/octet-stream' }, body: f });
@@ -246,6 +258,7 @@ export default function AdminPage() {
                                 const inis = await api.initiatives.list();
                                 const sorted = [...inis].sort((a,b)=> (a.sortOrder??0)-(b.sortOrder??0) || a.id-b.id);
                                 setInitiatives(sorted);
+                                setUploadFiles((prev) => ({ ...prev, [ini.id]: null }));
                               }}>Salvar</button>
                               <button className="px-3 py-1 rounded bg-red-600 text-white" onClick={async ()=>{
                                 if (!confirm('Excluir iniciativa?')) return;

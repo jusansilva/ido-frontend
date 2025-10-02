@@ -4,10 +4,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { api, type Campaign, type Payment } from '@/lib/api';
 import { getSession } from '@/lib/auth';
-import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
-export default function CampaignDetailPage() {
-  const { id } = useParams<{ id: string }>();
+export default function CampaignDetailClient({ id }: { id: number }) {
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +42,7 @@ export default function CampaignDetailPage() {
         {error && <p className="text-error">{error}</p>}
         {campaign && (
           <>
-            <a href="/campaigns" className="inline-flex items-center text-sm text-primary underline mb-2">← Voltar</a>
+            <Link href="/campaigns" className="inline-flex items-center text-sm text-primary underline mb-2">← Voltar</Link>
             <h1 className="text-2xl md:text-3xl font-bold text-primary mb-2">{campaign.title}</h1>
             <p className="text-sm text-gray-600 mb-2">Status: {campaign.closed ? 'Encerrada' : 'Aberta'}</p>
             {modSuccess && (
@@ -68,8 +67,9 @@ export default function CampaignDetailPage() {
                           const c = await api.campaigns.get(Number(id));
                           setCampaign(c);
                           setModSuccess('Campanha aprovada com sucesso.');
-                        } catch (e: any) {
-                          setModError(e?.message || 'Falha ao aprovar');
+                        } catch (e: unknown) {
+                          const msg = e instanceof Error ? e.message : 'Falha ao aprovar';
+                          setModError(msg);
                         } finally {
                           setModerating(null);
                         }
@@ -87,8 +87,9 @@ export default function CampaignDetailPage() {
                           const c = await api.campaigns.get(Number(id));
                           setCampaign(c);
                           setModSuccess('Campanha marcada como pendente.');
-                        } catch (e: any) {
-                          setModError(e?.message || 'Falha ao reprovar');
+                        } catch (e: unknown) {
+                          const msg = e instanceof Error ? e.message : 'Falha ao reprovar';
+                          setModError(msg);
                         } finally {
                           setModerating(null);
                         }
@@ -104,8 +105,8 @@ export default function CampaignDetailPage() {
               <div className="bg-white rounded-lg shadow p-4">
                 <p className="mb-3">Para doar, faça login ou crie sua conta.</p>
                 <div className="flex gap-3">
-                  <a href="/login" className="px-4 py-2 rounded-lg bg-primary text-white">Entrar</a>
-                  <a href="/register" className="px-4 py-2 rounded-lg border border-primary text-primary">Cadastrar</a>
+                  <Link href="/login" className="px-4 py-2 rounded-lg bg-primary text-white">Entrar</Link>
+                  <Link href="/register" className="px-4 py-2 rounded-lg border border-primary text-primary">Cadastrar</Link>
                 </div>
               </div>
             ) : campaign.closed ? (
@@ -263,3 +264,4 @@ function DonateBox({ campaignId }: { campaignId: number }) {
     </div>
   );
 }
+

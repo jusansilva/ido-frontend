@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ComoDoarPage() {
   return (
@@ -17,8 +18,8 @@ export default function ComoDoarPage() {
           <h2 className="text-2xl font-semibold text-primary">1. Crie sua conta ou faça login</h2>
           <p>
             Para acompanhar suas doações e gerar certificados, é recomendado ter uma conta. Acesse a página de{' '}
-            <a href="/register" className="text-primary underline">cadastro</a> ou faça{' '}
-            <a href="/login" className="text-primary underline">login</a> se já possui uma conta.
+            <Link href="/register" className="text-primary underline">cadastro</Link> ou faça{' '}
+            <Link href="/login" className="text-primary underline">login</Link> se já possui uma conta.
           </p>
           <div className="flex gap-4 items-center bg-white rounded-lg shadow p-4">
             <Image src="/file.svg" alt="Cadastro" width={48} height={48} />
@@ -30,7 +31,7 @@ export default function ComoDoarPage() {
           <h2 className="text-2xl font-semibold text-primary">2. Escolha uma campanha</h2>
           <p>
             Visite a página de{' '}
-            <a href="/campaigns" className="text-primary underline">Campanhas</a> para ver campanhas em andamento. Você pode conferir título, status e relatórios públicos de cada campanha.
+            <Link href="/campaigns" className="text-primary underline">Campanhas</Link> para ver campanhas em andamento. Você pode conferir título, status e relatórios públicos de cada campanha.
           </p>
           <div className="flex gap-4 items-center bg-white rounded-lg shadow p-4">
             <Image src="/globe.svg" alt="Campanhas" width={48} height={48} />
@@ -131,8 +132,8 @@ export default function ComoDoarPage() {
         <section className="space-y-4 mb-6">
           <h2 className="text-2xl font-semibold text-primary">Pronto para começar?</h2>
           <div className="flex gap-3">
-            <a href="/register" className="px-4 py-2 rounded-lg bg-success text-white font-semibold">Criar conta</a>
-            <a href="/campaigns" className="px-4 py-2 rounded-lg border border-primary text-primary font-semibold">Ver campanhas</a>
+            <Link href="/register" className="px-4 py-2 rounded-lg bg-success text-white font-semibold">Criar conta</Link>
+            <Link href="/campaigns" className="px-4 py-2 rounded-lg border border-primary text-primary font-semibold">Ver campanhas</Link>
           </div>
         </section>
       </main>
