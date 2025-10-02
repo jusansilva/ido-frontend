@@ -30,15 +30,15 @@
 .dark {
   /* Friendlier dark palette */
   --background: #0f1115;   /* slightly lifted from pure black */
-  --foreground: #e5e7eb;   /* gray-200 */
-  --surface: #20283a;      /* slightly lighter panel for better readability */
+  --foreground: #E7EAEE;   /* option A foreground */
+  --surface: #222B3D;      /* option A surface */
   --muted: #2b3240;        /* subtle borders */
-  --hover-surface: #283044; /* hover a bit brighter than surface */
-  --focus-ring: rgba(244, 192, 106, 0.45); /* warm amber focus to match accent */
+  --hover-surface: #2A3448; /* option A hover surface */
+  --focus-ring: rgba(246, 206, 133, 0.45); /* amber focus to match accent */
   --focus-size: 3px; /* slightly thicker to ensure visibility on dark */
 
   /* Override Tailwind v4 tokens in dark */
-  --color-primary: #F4C06A;   /* warm amber accent for dark mode */
+  --color-primary: #F6CE85;   /* option A amber accent */
   --color-secondary: #334155; /* slate-700 for subtle hovers */
   --color-text: var(--foreground);
   --color-background: var(--background);
