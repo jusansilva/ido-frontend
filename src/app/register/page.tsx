@@ -60,9 +60,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12 bg-background text-text">
+    <div className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12 bg-[var(--background)] text-[var(--foreground)]">
       {toast && <Toast type={toast.type} message={toast.message} onClose={() => setToast(null)} />}
-      <div className="w-full max-w-md bg-white rounded-xl shadow p-6 md:p-8">
+      <div className="w-full max-w-md bg-[--surface] rounded-xl shadow p-6 md:p-8 border border-[var(--muted)]">
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Criar conta</h1>
         <form onSubmit={onSubmit} className="space-y-5">
           <div>
@@ -73,7 +73,7 @@ export default function RegisterPage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Seu nome"
               required
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full border border-[var(--muted)] rounded px-3 py-2 focus:outline-none focus:border-primary bg-transparent"
             />
             {errors.name && <p className="mt-1 text-sm text-error">{errors.name}</p>}
           </div>
@@ -85,7 +85,7 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu@email.com"
               required
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full border border-[var(--muted)] rounded px-3 py-2 focus:outline-none focus:border-primary bg-transparent"
             />
             {errors.email && <p className="mt-1 text-sm text-error">{errors.email}</p>}
           </div>
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full border border-gray-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-primary"
+                className="w-full border border-[var(--muted)] rounded px-3 py-2 pr-10 focus:outline-none focus:border-primary bg-transparent"
               />
               <button type="button" aria-label="Mostrar senha" className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-primary" onClick={() => setShowPwd((v) => !v)}>
                 {showPwd ? 'Ocultar' : 'Mostrar'}
@@ -126,7 +126,7 @@ export default function RegisterPage() {
                 onChange={(e) => setConfirm(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full border border-gray-300 rounded px-3 py-2 pr-10 focus:outline-none focus:border-primary"
+                className="w-full border border-[var(--muted)] rounded px-3 py-2 pr-10 focus:outline-none focus:border-primary bg-transparent"
               />
               <button type="button" aria-label="Mostrar confirmação" className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-primary" onClick={() => setShowConfirm((v) => !v)}>
                 {showConfirm ? 'Ocultar' : 'Mostrar'}

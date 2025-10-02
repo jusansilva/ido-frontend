@@ -9,23 +9,23 @@ export default function Hero() {
   const router = useRouter();
 
   return (
-    <section className="bg-white rounded-xl shadow-lg mt-12 mb-12 p-8 flex flex-col md:flex-row items-center">
+    <section className="bg-[--surface] rounded-xl shadow-lg mt-12 mb-12 p-8 flex flex-col md:flex-row items-center border border-[var(--muted)]">
       <div className="flex-1">
         <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4 leading-tight">
           Transforme vidas com sua doação!
         </h1>
-        <p className="text-lg text-text mb-6">
+        <p className="text-lg mb-6">
           Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
         </p>
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <button
-            className="bg-success text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-green-700"
+            className="bg-success text-white font-bold px-6 py-3 rounded-lg shadow hover:opacity-90"
             onClick={() => setIsModalOpen(true)}
           >
             Criar campanha
           </button>
           <button
-            className="border-2 border-primary text-primary font-bold px-6 py-3 rounded-lg bg-white hover:bg-secondary"
+            className="border-2 border-primary text-primary font-bold px-6 py-3 rounded-lg bg-[--surface] hover:bg-[var(--hover-surface)]"
             onClick={() => router.push('/campaigns')}
           >
             Quero doar

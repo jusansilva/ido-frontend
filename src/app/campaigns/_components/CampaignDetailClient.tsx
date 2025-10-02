@@ -34,7 +34,7 @@ export default function CampaignDetailClient({ id }: { id: number }) {
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-4xl mx-auto px-4 py-8">
@@ -51,7 +51,7 @@ export default function CampaignDetailClient({ id }: { id: number }) {
               </div>
             )}
             {isAdmin && (
-              <div className="bg-white rounded-lg shadow p-4 mb-6">
+              <div className="bg-[--surface] rounded-lg shadow p-4 mb-6 border border-[var(--muted)]">
                 <div className="flex items-center justify-between gap-4 flex-wrap">
                   <p className="text-sm">Aprovação: <span className="font-semibold">{campaign.approved === true ? 'Aprovada' : campaign.approved === false ? 'Pendente' : 'Desconhecida'}</span></p>
                   <div className="flex gap-3">
@@ -102,7 +102,7 @@ export default function CampaignDetailClient({ id }: { id: number }) {
             )}
 
             {!isLogged ? (
-              <div className="bg-white rounded-lg shadow p-4">
+              <div className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
                 <p className="mb-3">Para doar, faça login ou crie sua conta.</p>
                 <div className="flex gap-3">
                   <Link href="/login" className="px-4 py-2 rounded-lg bg-primary text-white">Entrar</Link>
@@ -110,7 +110,7 @@ export default function CampaignDetailClient({ id }: { id: number }) {
                 </div>
               </div>
             ) : campaign.closed ? (
-              <div className="bg-white rounded-lg shadow p-4">
+              <div className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
                 <p>Esta campanha está encerrada.</p>
               </div>
             ) : (
@@ -193,14 +193,14 @@ function DonateBox({ campaignId }: { campaignId: number }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 space-y-4">
+    <div className="bg-[--surface] rounded-lg shadow p-4 space-y-4 border border-[var(--muted)]">
       <h2 className="text-xl font-semibold text-primary">Fazer uma doação</h2>
       <div className="flex flex-col md:flex-row gap-3 items-center">
         <label className="flex items-center gap-2">Valor (R$)
-          <input type="number" min={1} step={1} value={Math.round(amount/100)} onChange={(e) => setAmount(Math.max(1, Number(e.target.value)) * 100)} className="border rounded px-2 py-1 w-28" />
+          <input type="number" min={1} step={1} value={Math.round(amount/100)} onChange={(e) => setAmount(Math.max(1, Number(e.target.value)) * 100)} className="border border-[var(--muted)] rounded px-2 py-1 w-28 bg-transparent" />
         </label>
         <label className="flex items-center gap-2">Método
-          <select value={method} onChange={(e) => setMethod(e.target.value as 'PIX' | 'BOLETO' | 'CREDIT')} className="border rounded px-2 py-1">
+          <select value={method} onChange={(e) => setMethod(e.target.value as 'PIX' | 'BOLETO' | 'CREDIT')} className="border border-[var(--muted)] rounded px-2 py-1 bg-transparent">
             <option value="PIX">PIX (Safe2Pay)</option>
             <option value="BOLETO">Boleto (Safe2Pay)</option>
             <option value="CREDIT">Cartão (Safe2Pay)</option>
@@ -214,19 +214,19 @@ function DonateBox({ campaignId }: { campaignId: number }) {
       {method === 'CREDIT' && (
         <div className="grid md:grid-cols-2 gap-3">
           <label className="text-sm">Nome impresso no cartão
-            <input value={ccHolder} onChange={(e) => setCcHolder(e.target.value)} className="mt-1 w-full border rounded px-2 py-1" placeholder="FULANO DE TAL" />
+            <input value={ccHolder} onChange={(e) => setCcHolder(e.target.value)} className="mt-1 w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" placeholder="FULANO DE TAL" />
           </label>
           <label className="text-sm">Número do cartão
-            <input value={ccNumber} onChange={(e) => setCcNumber(e.target.value)} className="mt-1 w-full border rounded px-2 py-1" placeholder="4111 1111 1111 1111" />
+            <input value={ccNumber} onChange={(e) => setCcNumber(e.target.value)} className="mt-1 w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" placeholder="4111 1111 1111 1111" />
           </label>
           <label className="text-sm">Validade (MM/AAAA)
-            <input value={ccExp} onChange={(e) => setCcExp(e.target.value)} className="mt-1 w-full border rounded px-2 py-1" placeholder="12/2028" />
+            <input value={ccExp} onChange={(e) => setCcExp(e.target.value)} className="mt-1 w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" placeholder="12/2028" />
           </label>
           <label className="text-sm">CVV
-            <input value={ccCvv} onChange={(e) => setCcCvv(e.target.value)} className="mt-1 w-full border rounded px-2 py-1" placeholder="123" />
+            <input value={ccCvv} onChange={(e) => setCcCvv(e.target.value)} className="mt-1 w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" placeholder="123" />
           </label>
           <label className="text-sm">Parcelas
-            <input type="number" min={1} max={12} value={ccInst} onChange={(e) => setCcInst(Math.max(1, Math.min(12, Number(e.target.value))))} className="mt-1 w-full border rounded px-2 py-1" />
+            <input type="number" min={1} max={12} value={ccInst} onChange={(e) => setCcInst(Math.max(1, Math.min(12, Number(e.target.value))))} className="mt-1 w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" />
           </label>
         </div>
       )}
@@ -264,4 +264,3 @@ function DonateBox({ campaignId }: { campaignId: number }) {
     </div>
   );
 }
-

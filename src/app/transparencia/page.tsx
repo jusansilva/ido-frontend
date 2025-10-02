@@ -42,7 +42,7 @@ export default function TransparenciaPage() {
   const currency = (v: number) => (v / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -65,7 +65,7 @@ export default function TransparenciaPage() {
             <section>
               <h2 className="text-xl font-semibold text-primary mb-3">Top campanhas</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full bg-white rounded-lg shadow">
+                <table className="min-w-full bg-[--surface] rounded-lg shadow border border-[var(--muted)]">
                   <thead>
                     <tr className="text-left">
                       <th className="px-4 py-2">Campanha</th>
@@ -89,7 +89,7 @@ export default function TransparenciaPage() {
             <section>
               <h2 className="text-xl font-semibold text-primary mb-3">Doações recentes</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full bg-white rounded-lg shadow">
+                <table className="min-w-full bg-[--surface] rounded-lg shadow border border-[var(--muted)]">
                   <thead>
                     <tr className="text-left">
                       <th className="px-4 py-2">Data</th>
@@ -125,10 +125,9 @@ export default function TransparenciaPage() {
 
 function Kpi({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
       <div className="text-sm text-gray-600">{label}</div>
       <div className="text-2xl font-bold text-primary">{value}</div>
     </div>
   );
 }
-

@@ -39,7 +39,15 @@ export default function CampaignsPage() {
             isLogged ? api.donations.mine() : Promise.resolve([] as Donation[]),
           ]);
           if (!cancelled) {
-            setCampaigns(cs);
+            const normalized = ((): Campaign[] => {
+              if (Array.isArray(cs)) return cs;
+              if (cs && typeof cs === 'object') {
+                const maybe = cs as { items?: unknown };
+                if (Array.isArray(maybe.items)) return maybe.items as Campaign[];
+              }
+              return [];
+            })();
+            setCampaigns(normalized);
             setDonations(ds as Donation[]);
           }
         }
@@ -54,11 +62,11 @@ export default function CampaignsPage() {
     return () => { cancelled = true; };
   }, [isLogged, isAdmin]);
 
-  const openCampaigns = useMemo(() => campaigns.filter(c => !c.closed && c.approved), [campaigns]);
-  const myCampaigns = useMemo(() => campaigns.filter(c => userId && c.ownerId === userId) as Campaign[], [campaigns, userId]);
+  const openCampaigns = useMemo(() => (Array.isArray(campaigns) ? campaigns.filter(c => !c.closed && c.approved) : []), [campaigns]);
+  const myCampaigns = useMemo(() => (Array.isArray(campaigns) ? campaigns.filter(c => userId && c.ownerId === userId) as Campaign[] : []), [campaigns, userId]);
 
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24"></div>
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -116,7 +124,7 @@ function CampaignsGrid({ items, emptyText }: { items: Campaign[]; emptyText?: st
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {items.map((c) => (
-        <div key={c.id} className="bg-white rounded-lg shadow p-4 flex flex-col gap-2">
+        <div key={c.id} className="bg-[--surface] rounded-lg shadow p-4 flex flex-col gap-2 border border-[var(--muted)]">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-primary">{c.title}</h3>
             <span className={`text-xs px-2 py-1 rounded ${c.closed ? 'bg-gray-300 text-gray-700' : 'bg-success text-white'}`}>{c.closed ? 'Encerrada' : 'Aberta'}</span>
@@ -135,7 +143,7 @@ function DonationsList({ items }: { items: Donation[] }) {
   if (!items.length) return <p className="text-gray-700">Você ainda não realizou doações.</p>;
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white rounded-lg shadow">
+      <table className="min-w-full bg-[--surface] rounded-lg shadow border border-[var(--muted)]">
         <thead>
           <tr className="text-left">
             <th className="px-4 py-2">Data</th>

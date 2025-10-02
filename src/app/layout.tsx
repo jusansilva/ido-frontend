@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ClientBoot from "@/components/ClientBoot";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,8 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>
+    <html lang="pt-BR">
+      <body className={`antialiased bg-[var(--background)] text-[var(--foreground)]`}>
+        <ClientBoot />
         {children}
       </body>
     </html>

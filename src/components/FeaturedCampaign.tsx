@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function FeaturedCampaign() {
   return (
-    <section className="bg-white rounded-xl shadow mb-10 p-6 flex flex-col md:flex-row items-center gap-6">
+    <section className="bg-[--surface] rounded-xl shadow mb-10 p-6 flex flex-col md:flex-row items-center gap-6 border border-[var(--muted)]">
       <Image src="/logo.jpeg" alt="Capa da Campanha" width={160} height={160} className="w-40 h-40 object-cover rounded" />
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-2">Um Lar para Crianças em Situação de Risco</h1>

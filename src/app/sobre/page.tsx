@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function SobrePage() {
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-5xl mx-auto px-4 py-10 space-y-10">
@@ -16,7 +16,7 @@ export default function SobrePage() {
           </p>
         </header>
 
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
+        <section className="bg-[--surface] rounded-xl shadow p-6 space-y-3 border border-[var(--muted)]">
           <h2 className="text-2xl font-semibold text-primary">Nossa missão</h2>
           <p>
             Tornar a solidariedade acessível. Ajudamos organizações e pessoas a arrecadar recursos de forma rápida,
@@ -24,7 +24,7 @@ export default function SobrePage() {
           </p>
         </section>
 
-        <section className="bg-white rounded-xl shadow p-6 space-y-4">
+        <section className="bg-[--surface] rounded-xl shadow p-6 space-y-4 border border-[var(--muted)]">
           <h2 className="text-2xl font-semibold text-primary">Como funciona</h2>
           <ol className="list-decimal pl-6 space-y-2">
             <li>Crie uma campanha contando o objetivo e a necessidade.</li>
@@ -33,7 +33,7 @@ export default function SobrePage() {
           </ol>
         </section>
 
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
+        <section className="bg-[--surface] rounded-xl shadow p-6 space-y-3 border border-[var(--muted)]">
           <h2 className="text-2xl font-semibold text-primary">Transparência</h2>
           <p>
             O iDoe oferece relatórios por campanha com total arrecadado, média de doações e quantidade de doadores.
@@ -41,7 +41,7 @@ export default function SobrePage() {
           </p>
         </section>
 
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
+        <section className="bg-[--surface] rounded-xl shadow p-6 space-y-3 border border-[var(--muted)]">
           <h2 className="text-2xl font-semibold text-primary">Segurança</h2>
           <p>
             Integramos com provedores de pagamento confiáveis e aplicamos boas práticas de segurança para proteger
@@ -49,7 +49,7 @@ export default function SobrePage() {
           </p>
         </section>
 
-        <section className="bg-white rounded-xl shadow p-6 space-y-4">
+        <section className="bg-[--surface] rounded-xl shadow p-6 space-y-4 border border-[var(--muted)]">
           <h2 className="text-2xl font-semibold text-primary">Perguntas frequentes</h2>
           <div className="space-y-3">
             <details className="rounded border p-3">

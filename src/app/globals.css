@@ -6,8 +6,14 @@
 /* Seu CSS customizado aqui, se houver */
 
 :root {
-  --background: #F8F6F6; /* page bg from index.html */
-  --foreground: #2A2A2A; /* base text color from index.html */
+  /* Base tokens (light) */
+  --background: #F8F6F6;
+  --foreground: #2A2A2A;
+  --surface: #ffffff;         /* cards/headers */
+  --muted: #e5e7eb;           /* subtle borders */
+  --hover-surface: #f1f5f9;   /* slate-100 */
+  --focus-ring: rgba(32, 13, 0, 0.35); /* primary with alpha */
+  --focus-size: 2px;                    /* lighter focus for light mode */
 }
 
 @theme inline {
@@ -20,10 +26,37 @@
   --color-error: #FF5A5F;
 }
 
+/* Dark by class to match Tailwind darkMode: 'class' */
+.dark {
+  /* Friendlier dark palette */
+  --background: #0f1115;   /* slightly lifted from pure black */
+  --foreground: #e5e7eb;   /* gray-200 */
+  --surface: #20283a;      /* slightly lighter panel for better readability */
+  --muted: #2b3240;        /* subtle borders */
+  --hover-surface: #283044; /* hover a bit brighter than surface */
+  --focus-ring: rgba(244, 192, 106, 0.45); /* warm amber focus to match accent */
+  --focus-size: 3px; /* slightly thicker to ensure visibility on dark */
+
+  /* Override Tailwind v4 tokens in dark */
+  --color-primary: #F4C06A;   /* warm amber accent for dark mode */
+  --color-secondary: #334155; /* slate-700 for subtle hovers */
+  --color-text: var(--foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* Fallback to system preference when user didn't choose */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #e6e6e6;
+    --surface: #121212;
+    --muted: #2a2a2a;
+    --color-primary: #E5E8FF;
+    --color-secondary: #200D00;
+    --color-text: #F8F6F6;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
   }
 }
 
@@ -32,6 +65,41 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Placeholder colors tuned for light/dark */
+:root { --placeholder: #6b7280; }            /* gray-500 */
+.dark { --placeholder: #9aa4b2; }            /* softer slate for dark */
+input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
+
+/* Accessible focus styles (focus-visible only) */
+a, button, [role="button"], input, select, textarea { outline: none; }
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  box-shadow: 0 0 0 var(--focus-size) var(--focus-ring);
+  border-color: var(--color-primary);
+  transition: box-shadow 120ms ease, border-color 120ms ease;
+}
+
+/* Gentle transitions for theme changes */
+body, a, button, input, select, textarea {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+/* Dark-mode friendliness overrides for legacy utility classes */
+.dark .text-gray-700 { color: #d1d5db; }
+.dark .text-gray-600 { color: #cbd5e1; }
+.dark .text-gray-500 { color: #94a3b8; }
+.dark .bg-gray-100 { background-color: #1f2633; }
+.dark .bg-gray-50 { background-color: #1a2030; }
+.dark .border-gray-300 { border-color: var(--muted); }
+.dark .text-primary { color: var(--color-primary) !important; }
+.dark .border-primary { border-color: var(--color-primary) !important; }
+.dark .bg-primary { background-color: var(--color-primary) !important; }
+.dark .bg-primary.text-white, .dark .bg-primary .text-white { color: #0f1115 !important; }
 
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar { display: none; }

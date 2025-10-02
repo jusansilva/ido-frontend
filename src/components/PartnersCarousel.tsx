@@ -64,7 +64,7 @@ export default function PartnersCarousel() {
 
   return (
     <section id="iniciativas" className="mb-12">
-      <div className="bg-white rounded-xl shadow-lg p-8 md:p-12 flex-col md:flex-row items-center gap-8 mb-10 md:flex">
+      <div className="bg-[--surface] rounded-xl shadow-lg p-8 md:p-12 flex-col md:flex-row items-center gap-8 mb-10 md:flex border border-[var(--muted)]">
         <div className="flex-1">
           <span className="inline-block text-sm font-semibold text-success mb-3">INICIATIVA</span>
           <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4 leading-tight">
@@ -78,7 +78,7 @@ export default function PartnersCarousel() {
             <a href="#" className="inline-flex items-center gap-2 bg-success text-white px-5 py-3 rounded-lg shadow hover:brightness-95 transition">
               Conheça as Iniciativas
             </a>
-            <a href="#" className="inline-flex items-center gap-2 border-2 border-primary text-primary px-5 py-3 rounded-lg hover:bg-secondary transition">
+            <a href="#" className="inline-flex items-center gap-2 border-2 border-primary text-primary px-5 py-3 rounded-lg hover:bg-[var(--hover-surface)] transition">
               Quero Ajudar
             </a>
           </div>
@@ -88,7 +88,7 @@ export default function PartnersCarousel() {
           <div className="relative w-full overflow-hidden">
             <div ref={trackRef} className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 no-scrollbar w-full">
               {slides.map((p) => (
-                <div key={p.name} className="min-w-[240px] sm:min-w-[260px] md:min-w-[300px] lg:min-w-[340px] snap-center bg-white rounded-lg p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-col items-center justify-center border">
+                <div key={p.name} className="min-w-[240px] sm:min-w-[260px] md:min-w-[300px] lg:min-w-[340px] snap-center bg-[--surface] rounded-lg p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-col items-center justify-center border border-[var(--muted)]">
                   <Image
                     src={p.img}
                     alt={p.name}
@@ -103,10 +103,10 @@ export default function PartnersCarousel() {
             </div>
 
             <div className="absolute left-2 top-1/2 -translate-y-1/2 hidden md:block">
-              <button onClick={prev} className="bg-white border rounded-full p-2 shadow">‹</button>
+              <button onClick={prev} className="bg-[--surface] border border-[var(--muted)] rounded-full p-2 shadow">‹</button>
             </div>
             <div className="absolute right-2 top-1/2 -translate-y-1/2 hidden md:block">
-              <button onClick={next} className="bg-white border rounded-full p-2 shadow">›</button>
+              <button onClick={next} className="bg-[--surface] border border-[var(--muted)] rounded-full p-2 shadow">›</button>
             </div>
 
             <div className="flex gap-2 justify-center mt-4">

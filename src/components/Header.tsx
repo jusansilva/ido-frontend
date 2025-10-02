@@ -6,6 +6,22 @@ import { usePathname } from 'next/navigation';
 import { getSession } from '@/lib/auth';
 import { api } from '@/lib/api';
 
+function toggleTheme() {
+  try {
+    const root = document.documentElement;
+    const ls = window.localStorage;
+    const isDark = root.classList.contains('dark');
+    root.classList.remove('light', 'dark');
+    if (isDark) {
+      root.classList.add('light');
+      ls.setItem('theme', 'light');
+    } else {
+      root.classList.add('dark');
+      ls.setItem('theme', 'dark');
+    }
+  } catch {}
+}
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState<string | null>(null);
@@ -20,7 +36,7 @@ export default function Header() {
 
   function navClass(href: string) {
     const base = 'font-medium px-3 py-2 rounded hover:text-primary';
-    const active = isActive(href) ? ' bg-secondary text-primary border border-primary' : '';
+    const active = isActive(href) ? ' bg-[var(--hover-surface)] text-primary border border-primary' : '';
     return base + active;
   }
 
@@ -50,17 +66,24 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white shadow z-50 border-b border-gray-200">
+    <header className="fixed top-0 left-0 w-full bg-[--surface] shadow z-50 border-b border-[var(--muted)]">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto md:h-20" priority />
+          <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-14 w-auto md:h-20" priority />
         </div>
-        <nav className="hidden md:flex gap-8">
+        <nav className="hidden md:flex gap-6 items-center">
           <Link href="/" className={navClass('/')}>Início</Link>
           <Link href="/campaigns" className={navClass('/campaigns')}>Campanhas</Link>
           <Link href="/como-doar" className={navClass('/como-doar')}>Como Doar</Link>
           <Link href="/sobre" className={navClass('/sobre')}>Sobre</Link>
           <Link href="/transparencia" className={navClass('/transparencia')}>Transparência</Link>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="ml-1 rounded border border-[var(--muted)] px-3 py-1.5 text-sm bg-transparent hover:bg-[var(--hover-surface)] text-primary"
+            aria-label="Alternar tema claro/escuro"
+            title="Alternar tema"
+          >Tema</button>
           {name ? (
             <div className="flex items-center gap-3">
               {role === 'ADMIN' && (
@@ -69,7 +92,7 @@ export default function Header() {
                 </Link>
               )}
               {role !== 'ADMIN' && (
-                <Link href="/campaigns/new" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-secondary">Nova campanha</Link>
+                <Link href="/campaigns/new" className="inline-flex items-center font-medium px-3 py-2 rounded-lg border border-primary text-primary hover:bg-[var(--hover-surface)]">Nova campanha</Link>
               )}
               <span className="text-sm text-gray-700">Olá, {name.split(' ')[0]}</span>
               <button onClick={handleLogout} className="inline-flex items-center font-medium px-3 py-2 rounded-lg bg-primary text-white hover:opacity-90">
@@ -77,7 +100,7 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <Link href="/login" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-secondary">Login</Link>
+            <Link href="/login" className="inline-flex items-center font-medium px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-[var(--hover-surface)]">Login</Link>
           )}
         </nav>
         <button
@@ -90,7 +113,7 @@ export default function Header() {
       </div>
       {/* Side menu */}
       <nav
-        className={`fixed top-0 right-[-250px] w-[220px] h-full bg-white shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col ${
+        className={`fixed top-0 right-[-250px] w-[220px] h-full bg-[--surface] shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col ${
           isOpen ? 'right-0' : ''
         }`}
       >
@@ -104,11 +127,20 @@ export default function Header() {
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-20 w-auto mb-4" />
         </div>
         <ul className="flex flex-col gap-4 px-6">
-          <li><Link href="/" className={`font-medium block rounded px-3 py-2 ${isActive('/') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Início</Link></li>
-          <li><Link href="/campaigns" className={`font-medium block rounded px-3 py-2 ${isActive('/campaigns') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Campanhas</Link></li>
-          <li><Link href="/como-doar" className={`font-medium block rounded px-3 py-2 ${isActive('/como-doar') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Como Doar</Link></li>
-          <li><Link href="/sobre" className={`font-medium block rounded px-3 py-2 ${isActive('/sobre') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Sobre</Link></li>
-          <li><Link href="/transparencia" className={`font-medium block rounded px-3 py-2 ${isActive('/transparencia') ? 'bg-secondary text-primary' : 'text-primary/80 hover:text-primary'}`}>Transparência</Link></li>
+          <li><Link href="/" className={`font-medium block rounded px-3 py-2 ${isActive('/') ? 'bg-[var(--hover-surface)] text-primary' : 'text-primary/80 hover:text-primary'}`}>Início</Link></li>
+          <li><Link href="/campaigns" className={`font-medium block rounded px-3 py-2 ${isActive('/campaigns') ? 'bg-[var(--hover-surface)] text-primary' : 'text-primary/80 hover:text-primary'}`}>Campanhas</Link></li>
+          <li><Link href="/como-doar" className={`font-medium block rounded px-3 py-2 ${isActive('/como-doar') ? 'bg-[var(--hover-surface)] text-primary' : 'text-primary/80 hover:text-primary'}`}>Como Doar</Link></li>
+          <li><Link href="/sobre" className={`font-medium block rounded px-3 py-2 ${isActive('/sobre') ? 'bg-[var(--hover-surface)] text-primary' : 'text-primary/80 hover:text-primary'}`}>Sobre</Link></li>
+          <li><Link href="/transparencia" className={`font-medium block rounded px-3 py-2 ${isActive('/transparencia') ? 'bg-[var(--hover-surface)] text-primary' : 'text-primary/80 hover:text-primary'}`}>Transparência</Link></li>
+          <li className="pt-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="rounded border border-[var(--muted)] px-3 py-2 text-sm bg-transparent text-primary"
+              aria-label="Alternar tema claro/escuro"
+              title="Alternar tema"
+            >Tema</button>
+          </li>
           {name ? (
             <>
               {role === 'ADMIN' && (

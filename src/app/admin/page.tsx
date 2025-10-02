@@ -73,7 +73,7 @@ export default function AdminPage() {
   if (!allowed) return null;
 
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24"></div>
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -81,9 +81,9 @@ export default function AdminPage() {
         {loading && <p>Carregando...</p>}
         {!loading && (
           <div className="space-y-10">
-            <section className="bg-white rounded-lg shadow p-4">
+            <section className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
               <h2 className="text-xl font-semibold text-primary mb-3">Cadastrar iniciativa</h2>
-              <p className="text-sm text-gray-700 mb-3">Cadastre iniciativas para destacar na página inicial. Defina imagem, título, descrição e ordem.</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Cadastre iniciativas para destacar na página inicial. Defina imagem, título, descrição e ordem.</p>
               <form
                 className="grid gap-3"
                 onSubmit={async (e) => {
@@ -133,8 +133,8 @@ export default function AdminPage() {
                   <input
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder="Título da iniciativa"
-                    className="mt-1 flex-1 w-full border rounded px-3 py-2"
+                    placeholder="Ex.: Ação do agasalho"
+                    className="mt-1 flex-1 w-full border border-[var(--muted)] rounded px-3 py-2 bg-transparent"
                   />
                 </label>
                 <label className="text-sm">
@@ -142,8 +142,8 @@ export default function AdminPage() {
                   <textarea
                     value={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
-                    placeholder="Descreva a iniciativa"
-                    className="mt-1 flex-1 w-full border rounded px-3 py-2"
+                    placeholder="Ex.: Doe e ajude famílias em vulnerabilidade"
+                    className="mt-1 flex-1 w-full border border-[var(--muted)] rounded px-3 py-2 bg-transparent"
                     rows={3}
                   />
                 </label>
@@ -153,7 +153,8 @@ export default function AdminPage() {
                     type="number"
                     value={newSortOrder}
                     onChange={(e) => setNewSortOrder(Number(e.target.value) || 0)}
-                    className="mt-1 w-28 border rounded px-3 py-2"
+                    placeholder="Ex.: 0"
+                    className="mt-1 w-28 border border-[var(--muted)] rounded px-3 py-2 bg-transparent"
                   />
                 </label>
                 <div>
@@ -167,7 +168,7 @@ export default function AdminPage() {
               {createError && <p className="text-error mt-2">{createError}</p>}
               {createSuccess && <p className="text-green-700 mt-2">{createSuccess}</p>}
             </section>
-            <section className="bg-white rounded-lg shadow p-4">
+            <section className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-xl font-semibold text-primary">Iniciativas</h2>
                 <button
@@ -183,7 +184,7 @@ export default function AdminPage() {
                     setInitiatives(sorted);
                     setOrderDirty(false);
                   }}
-                  className={`px-3 py-1 rounded border ${orderDirty ? 'border-primary text-primary' : 'border-gray-300 text-gray-400 cursor-not-allowed'}`}
+                  className={`px-3 py-1 rounded border ${orderDirty ? 'border-primary text-primary' : 'border-[var(--muted)] text-gray-400 cursor-not-allowed'}`}
                 >Salvar ordem</button>
               </div>
               {initLoading ? (
@@ -194,7 +195,7 @@ export default function AdminPage() {
                 <p className="text-gray-700">Nenhuma iniciativa cadastrada.</p>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="min-w-full bg-white rounded-lg shadow text-sm">
+                  <table className="min-w-full bg-[--surface] rounded-lg shadow text-sm border border-[var(--muted)]">
                     <thead>
                       <tr className="text-left">
                         <th className="px-3 py-2">Ordem</th>
@@ -208,7 +209,7 @@ export default function AdminPage() {
                       {initiatives.map((ini, idx) => (
                         <tr
                           key={ini.id}
-                          className={`border-t align-top ${dragIndex === idx ? 'bg-gray-50' : ''}`}
+                          className={`border-t border-[var(--muted)] align-top ${dragIndex === idx ? 'bg-gray-50 dark:bg-[#161616]' : ''}`}
                           draggable
                           onDragStart={()=> setDragIndex(idx)}
                           onDragOver={(e)=> { e.preventDefault(); }}
@@ -231,10 +232,10 @@ export default function AdminPage() {
                             <img src={ini.imageUrl} alt="img" className="w-16 h-16 object-cover rounded" />
                           </td>
                           <td className="px-3 py-2 min-w-56">
-                            <input defaultValue={ini.title} onChange={(e)=> ini.title=e.target.value} className="w-full border rounded px-2 py-1" />
+                            <input defaultValue={ini.title} onChange={(e)=> ini.title=e.target.value} placeholder="Título da iniciativa" className="w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" />
                           </td>
                           <td className="px-3 py-2 min-w-72">
-                            <textarea defaultValue={ini.description} onChange={(e)=> ini.description=e.target.value} className="w-full border rounded px-2 py-1" rows={2} />
+                            <textarea defaultValue={ini.description} onChange={(e)=> ini.description=e.target.value} placeholder="Descrição da iniciativa" className="w-full border border-[var(--muted)] rounded px-2 py-1 bg-transparent" rows={2} />
                             <input
                               type="file"
                               accept="image/*"
@@ -332,8 +333,8 @@ export default function AdminPage() {
 
 function Kpi({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4">
-      <div className="text-sm text-gray-600">{label}</div>
+    <div className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
+      <div className="text-sm text-gray-600 dark:text-gray-300">{label}</div>
       <div className="text-2xl font-bold text-primary">{value}</div>
     </div>
   );
@@ -341,7 +342,7 @@ function Kpi({ label, value }: { label: string; value: string }) {
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div className="bg-[--surface] rounded-lg shadow p-4 border border-[var(--muted)]">
       <h3 className="font-semibold text-primary mb-2">{title}</h3>
       {children}
     </div>
@@ -352,7 +353,7 @@ function CampaignsModeration({ items, onAction }: { items: Campaign[]; onAction:
   if (!items.length) return <p className="text-gray-700">Sem pendências.</p>;
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white rounded-lg shadow">
+      <table className="min-w-full bg-[--surface] rounded-lg shadow border border-[var(--muted)]">
         <thead>
           <tr className="text-left">
             <th className="px-4 py-2">ID</th>
@@ -383,7 +384,7 @@ function CampaignsList({ items }: { items: Campaign[] }) {
   if (!items.length) return <p className="text-gray-700">Nenhuma campanha aprovada.</p>;
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white rounded-lg shadow">
+      <table className="min-w-full bg-[--surface] rounded-lg shadow border border-[var(--muted)]">
         <thead>
           <tr className="text-left">
             <th className="px-4 py-2">ID</th>
@@ -394,7 +395,7 @@ function CampaignsList({ items }: { items: Campaign[] }) {
         </thead>
         <tbody>
           {items.map((c) => (
-            <tr key={c.id} className="border-t">
+            <tr key={c.id} className="border-t border-[var(--muted)]">
               <td className="px-4 py-2">{c.id}</td>
               <td className="px-4 py-2">{c.title}</td>
               <td className="px-4 py-2">{c.closed ? 'Encerrada' : 'Aberta'}</td>

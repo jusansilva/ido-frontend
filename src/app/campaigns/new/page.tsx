@@ -37,14 +37,14 @@ export default function NewCampaignPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-text font-['Roboto',sans-serif]">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6">Nova campanha</h1>
-        <form onSubmit={onSubmit} className="bg-white rounded-lg shadow p-4 space-y-4">
+        <form onSubmit={onSubmit} className="bg-[--surface] rounded-lg shadow p-4 space-y-4 border border-[var(--muted)]">
           <label className="block text-sm">Título
-            <input value={title} onChange={(e) => setTitle(e.target.value)} required className="mt-1 w-full border rounded px-3 py-2" placeholder="Ex.: Campanha de inverno" />
+            <input value={title} onChange={(e) => setTitle(e.target.value)} required className="mt-1 w-full border border-[var(--muted)] rounded px-3 py-2 bg-transparent" placeholder="Ex.: Campanha de inverno" />
           </label>
           <div className="flex gap-3">
             <button type="submit" disabled={loading} className="px-4 py-2 rounded-lg bg-primary text-white">{loading ? 'Enviando...' : 'Criar'}</button>
