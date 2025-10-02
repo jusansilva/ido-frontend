@@ -2,7 +2,7 @@ name: Deploy to S3 + CloudFront
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch: {}
 
 concurrency:
@@ -47,13 +47,15 @@ jobs:
 
       - name: Sync to S3
         env:
-          S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET_NAME || vars.S3_BUCKET_NAME || env.S3_BUCKET }}
         run: |
+          if [ -z "${S3_BUCKET:-}" ]; then echo "S3 bucket not configured. Set secret S3_BUCKET_NAME or repo var S3_BUCKET_NAME"; exit 1; fi
           if [ ! -d "out" ]; then echo "out/ not found. Did Next build run with output: 'export'?"; exit 1; fi
           aws s3 sync ./out s3://$S3_BUCKET --delete
 
       - name: Invalidate CloudFront cache
+        if: env.DISTRIBUTION_ID != ''
         env:
-          DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID || vars.CLOUDFRONT_DISTRIBUTION_ID || env.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |
           aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"
