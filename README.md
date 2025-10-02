@@ -64,3 +64,14 @@ Fontes
 Observações
 - `index.html` e `script.js` permanecem no root SOMENTE como referência visual. Qualquer ajuste funcional deve ser feito nos componentes React/Next.
 - Caso veja diferenças sutis de espaçamento/hover, ajuste direto nas classes Tailwind dos componentes correspondentes.
+
+Deploy (S3 + CloudFront)
+- O projeto está configurado para export estático (`output: 'export'` no `next.config.ts`), ideal para S3 + CloudFront.
+- Infra (Terraform): veja `infra/terraform/README.md` para criar o bucket S3 privado e a distribuição CloudFront (com OAC e roteamento SPA).
+- CI (GitHub Actions): arquivo `.github/workflows/deploy.yml` publica o conteúdo de `out/` no S3 e invalida o CloudFront a cada push em `main`.
+- Secrets necessários no repositório (Settings > Secrets and variables > Actions):
+  - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
+  - `S3_BUCKET_NAME` (nome do bucket criado pelo Terraform)
+  - `CLOUDFRONT_DISTRIBUTION_ID`
+  - `NEXT_PUBLIC_API_BASE_URL` (URL pública do backend consumida pelo frontend)
+- Build local para validar: `NEXT_PUBLIC_API_BASE_URL=https://api.seudominio.com npm run build` e verifique a pasta `out/`.
