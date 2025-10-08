@@ -15,7 +15,7 @@ export default function Hero() {
           Transforme vidas com sua doação!
         </h1>
         <p className="text-lg mb-6">
-          Milhares de pessoas já confiaram no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
+          As pessoas já confiam no iDoe para realizar o impossível. Junte-se a nós e faça parte dessa corrente do bem!
         </p>
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <button
