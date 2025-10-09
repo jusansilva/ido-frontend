@@ -4,15 +4,25 @@ const API_PROXY_TARGET = process.env.API_PROXY_TARGET || "http://localhost:4000"
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  // Gera export estático para S3 + CloudFront
-  output: "export",
+  // Removido "output: export" para permitir rotas dinâmicas
+  // Se precisar voltar ao export estático, adicione generateStaticParams nas rotas dinâmicas
 
-  // Desativa o otimizador de imagens do Next.js (/_next/image)
+  // Configuração de imagens
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'idoe-images.s3.us-east-2.amazonaws.com',
+      },
+    ],
   },
 
-  // Rewrites são ignorados no export estático (só ajudam no dev local)
+  // Rewrites para proxy da API em dev
   async rewrites() {
     if (isProd || process.env.NEXT_PUBLIC_API_BASE_URL) {
       return [];

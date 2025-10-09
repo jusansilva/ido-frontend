@@ -1,4 +1,5 @@
 "use client";
+import PageTitle from '@/components/PageTitle';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
@@ -74,6 +75,7 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
+      <PageTitle title="Admin" />
       <Header />
       <div className="h-20 md:h-24"></div>
       <main className="max-w-6xl mx-auto px-4 py-8">

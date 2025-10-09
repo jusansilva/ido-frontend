@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Toast from '@/components/Toast';
+import PageTitle from '@/components/PageTitle';
 import { api } from '@/lib/api';
 import { saveSession } from '@/lib/auth';
 
@@ -41,6 +42,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-4 py-12 bg-[var(--background)] text-[var(--foreground)]">
+      <PageTitle title="Login" />
       {toast && <Toast type={toast.type} message={toast.message} onClose={() => setToast(null)} />}
       <div className="w-full max-w-md bg-[--surface] rounded-xl shadow p-6 md:p-8 border border-[var(--muted)]">
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Entrar</h1>

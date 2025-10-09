@@ -1,10 +1,12 @@
 import Header from '@/components/Header';
+import PageTitle from '@/components/PageTitle';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export default function SobrePage() {
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
+      <PageTitle title="Sobre" />
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-5xl mx-auto px-4 py-10 space-y-10">

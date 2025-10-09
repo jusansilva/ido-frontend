@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FilterBar from '@/components/FilterBar';
@@ -5,6 +6,11 @@ import FeaturedCampaign from '@/components/FeaturedCampaign';
 import CampaignList from '@/components/CampaignList';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Início",
+  description: "Doe agora e ajude quem precisa! Campanhas de doação verificadas e transparentes."
+};
 
 export default function Home() {
   return (

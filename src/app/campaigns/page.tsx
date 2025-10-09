@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageTitle from '@/components/PageTitle';
 import { api, type Campaign, type Donation } from '@/lib/api';
 import { getSession } from '@/lib/auth';
 
@@ -67,6 +68,7 @@ export default function CampaignsPage() {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
+      <PageTitle title="Campanhas" />
       <Header />
       <div className="h-20 md:h-24"></div>
       <main className="max-w-6xl mx-auto px-4 py-8">

@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import PageTitle from '@/components/PageTitle';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import Link from 'next/link';
 export default function ComoDoarPage() {
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
+      <PageTitle title="Como Doar" />
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-4xl mx-auto px-4 py-10">

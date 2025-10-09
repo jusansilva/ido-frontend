@@ -1,4 +1,5 @@
 "use client";
+import PageTitle from '@/components/PageTitle';
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -43,6 +44,7 @@ export default function TransparenciaPage() {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-['Roboto',sans-serif]">
+      <PageTitle title="Transparência" />
       <Header />
       <div className="h-20 md:h-24" />
       <main className="max-w-6xl mx-auto px-4 py-8">

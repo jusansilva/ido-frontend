@@ -1,11 +1,8 @@
 "use client";
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Modal from './Modal';
 import Image from 'next/image';
 
 export default function Hero() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   return (
@@ -20,7 +17,7 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <button
             className="bg-success text-white font-bold px-6 py-3 rounded-lg shadow hover:opacity-90"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => router.push('/campaigns/new')}
           >
             Criar campanha
           </button>
@@ -36,7 +33,6 @@ export default function Hero() {
       <div className="flex-1 flex justify-center">
         <Image src="/logo.jpeg" alt="Imagem destaque iDoe" width={320} height={320} className="rounded-2xl shadow-lg w-full max-w-xs h-auto object-cover" />
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

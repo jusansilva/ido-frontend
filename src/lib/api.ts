@@ -68,7 +68,20 @@ function getSessionSafe(): Session | null {
 
 export type User = { id: number; name: string; email: string; role: Role };
 export type AuthResponse = { user: User; accessToken: string; refreshToken: string };
-export type Campaign = { id: number; title: string; ownerId: number; closed: boolean; approved: boolean; createdAt: string; updatedAt: string };
+export type Campaign = { 
+  id: number; 
+  title: string; 
+  description?: string | null;
+  imageUrl?: string | null;
+  goal?: number | null;
+  category?: string | null;
+  endDate?: string | null;
+  ownerId: number; 
+  closed: boolean; 
+  approved: boolean; 
+  createdAt: string; 
+  updatedAt: string 
+};
 export type Donation = { id: number; amount: number; donorId?: number; campaignId: number; createdAt: string };
 export type Payment = {
   id: number;
@@ -111,7 +124,10 @@ export const api = {
   campaigns: {
     list: () => request<Campaign[]>('/campaigns', { method: 'GET' }),
     get: (id: number) => request<Campaign>(`/campaigns/${id}`, { method: 'GET' }),
-    create: (title: string) => request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify({ title }) }),
+    create: (payload: { title: string; description?: string; imageUrl?: string; goal?: number; category?: string; endDate?: string }) => 
+      request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify(payload) }),
+    getUploadUrl: (filename: string, contentType: string) =>
+      request<{ url: string; key: string; publicUrl?: string }>(`/campaigns/upload-url`, { method: 'POST', body: JSON.stringify({ filename, contentType }) }),
     report: (id: number) => request<{ count: number; total: number; average: number; donorsCount: number; lastDonationAt: string | null }>(`/campaigns/${id}/report`, { method: 'GET' }),
   },
   initiatives: {

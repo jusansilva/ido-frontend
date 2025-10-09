@@ -48,38 +48,9 @@ export default function NewCampaignPage() {
     }
     
     try {
-      // 1) Upload da imagem para S3
-      let imageUrl: string | undefined;
-      if (formData.image) {
-        setMessage('Fazendo upload da imagem...');
-        const uploadResponse = await api.campaigns.getUploadUrl(
-          formData.image.name, 
-          formData.image.type || 'application/octet-stream'
-        );
-        
-        // 2) PUT file to S3
-        await fetch(uploadResponse.url, { 
-          method: 'PUT', 
-          headers: { 'Content-Type': formData.image.type || 'application/octet-stream' }, 
-          body: formData.image 
-        });
-        
-        imageUrl = uploadResponse.publicUrl || uploadResponse.url.split('?')[0];
-      }
-      
-      // 3) Criar campanha com todos os dados
-      setMessage('Criando campanha...');
-      const goalInCents = Math.round(parseFloat(formData.goal) * 100);
-      
-      const c = await api.campaigns.create({
-        title: formData.title,
-        description: formData.description,
-        imageUrl,
-        goal: goalInCents,
-        category: formData.category,
-        endDate: formData.endDate
-      });
-      
+      // Por enquanto, criando só com o título (como a API atual aceita)
+      // TODO: Atualizar API para aceitar todos os campos
+      const c = await api.campaigns.create(formData.title);
       const pending = !c.approved;
       setMessage(pending ? 'Campanha criada e enviada para aprovação do admin.' : 'Campanha criada com sucesso.');
       setTimeout(() => router.push('/campaigns'), 1500);
@@ -232,6 +203,18 @@ export default function NewCampaignPage() {
               Cancelar
             </Link>
           </div>
+        </form>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+          <div className="flex gap-3">
+            <button type="submit" disabled={loading} className="px-4 py-2 rounded-lg bg-primary text-white">{loading ? 'Enviando...' : 'Criar'}</button>
+            <Link className="px-4 py-2 rounded-lg border border-primary text-primary" href="/campaigns">Cancelar</Link>
+          </div>
+          {message && <p className="text-success">{message}</p>}
+          {error && <p className="text-error">{error}</p>}
         </form>
       </main>
       <Footer />

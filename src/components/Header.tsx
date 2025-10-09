@@ -66,7 +66,7 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-[--surface] shadow z-50 border-b border-[var(--muted)]">
+    <header className="fixed top-0 left-0 w-full bg-[var(--background)] shadow z-50 border-b border-[var(--muted)]">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
           <Image src="/logo.jpeg" alt="Logo iDoe" width={160} height={80} className="h-14 w-auto md:h-20" priority />
@@ -113,7 +113,7 @@ export default function Header() {
       </div>
       {/* Side menu */}
       <nav
-        className={`fixed top-0 right-[-250px] w-[220px] h-full bg-[--surface] shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col ${
+        className={`fixed top-0 right-[-250px] w-[220px] h-full bg-[var(--background)] shadow-lg transition-all duration-300 z-50 pt-6 md:hidden flex flex-col ${
           isOpen ? 'right-0' : ''
         }`}
       >
